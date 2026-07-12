@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phoenix Rising - Journal 3 Cover (8.5×8.5")</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #1a0a1a;
+            padding: 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            color: #d4af37;
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        /* Cover: 8.5×8.5" at 300 DPI = 2550×2550px */
+        .cover {
+            width: 2550px;
+            height: 2550px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg,
+                #2d1b4e 0%,
+                #4a2c5e 20%,
+                #6b3d5f 40%,
+                #8b5a4a 60%,
+                #d4a574 80%,
+                #f5d5b8 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12pt;
+            padding: 150px 100px;
+            text-align: center;
+        }
+
+        /* Bleed indicator */
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 37.5px;
+            left: 37.5px;
+            right: 37.5px;
+            bottom: 37.5px;
+            border: 1px solid rgba(212,175,55,0.15);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Safe area indicator */
+        .cover::after {
+            content: '';
+            position: absolute;
+            top: 75px;
+            left: 75px;
+            right: 75px;
+            bottom: 75px;
+            border: 1px dashed rgba(212,175,55,0.08);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        /* Decorative phoenix elements */
+        .phoenix-icon {
+            font-size: 80pt;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 4px 8px rgba(0,0,0,0.3), 0 0 20px rgba(212,175,55,0.4); }
+            50% { text-shadow: 0 4px 8px rgba(0,0,0,0.3), 0 0 40px rgba(212,175,55,0.8); }
+        }
+
+        /* Top tagline */
+        .top-tagline {
+            font-size: 28pt;
+            font-weight: normal;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #e8d9c3;
+            margin-bottom: 60px;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        /* Main title */
+        .title {
+            font-size: 140pt;
+            font-weight: 400;
+            letter-spacing: -1px;
+            margin: 0 0 20px 0;
+            background: linear-gradient(180deg, #f5d5b8 0%, #d4af37 50%, #c9a961 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            font-style: italic;
+            line-height: 1;
+        }
+
+        /* Subtitle with decorative elements */
+        .subtitle {
+            font-size: 32pt;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: #d4af37;
+            margin: 30px 0 40px 0;
+            font-style: italic;
+        }
+
+        .subtitle::before,
+        .subtitle::after {
+            content: '✦';
+            margin: 0 20px;
+            opacity: 0.8;
+        }
+
+        /* Descriptive text */
+        .description {
+            font-size: 22pt;
+            line-height: 1.6;
+            color: #e8d9c3;
+            margin: 40px 0;
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+
+        /* Keyword elements */
+        .keywords {
+            font-size: 18pt;
+            color: #d4af37;
+            margin: 40px 0;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        .keywords span {
+            display: block;
+            margin: 8px 0;
+            font-weight: normal;
+        }
+
+        /* Bottom tagline */
+        .bottom-tagline {
+            font-size: 24pt;
+            font-weight: 400;
+            color: #f5d5b8;
+            margin: 60px 0 40px 0;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        .tagline-emphasis {
+            font-size: 20pt;
+            color: #d4af37;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 15px;
+            font-weight: normal;
+        }
+
+        /* Author info */
+        .author-section {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid rgba(212,175,55,0.3);
+        }
+
+        .author-name {
+            font-size: 32pt;
+            font-weight: 400;
+            color: #d4af37;
+            font-style: italic;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .publisher {
+            font-size: 16pt;
+            color: #c9a961;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        /* Heart accent */
+        .heart {
+            font-size: 24pt;
+            color: #d4af37;
+            margin: 20px 0;
+            opacity: 0.8;
+        }
+
+        /* Responsive scaling */
+        @media (max-width: 2000px) {
+            .cover {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1;
+                min-height: 600px;
+                padding: 60px 40px;
+            }
+
+            .phoenix-icon {
+                font-size: clamp(40pt, 12vw, 80pt);
+                margin-bottom: 30px;
+            }
+
+            .title {
+                font-size: clamp(60pt, 20vw, 140pt);
+            }
+
+            .top-tagline {
+                font-size: clamp(14pt, 4vw, 28pt);
+            }
+
+            .subtitle {
+                font-size: clamp(18pt, 5vw, 32pt);
+            }
+
+            .description {
+                font-size: clamp(12pt, 3vw, 22pt);
+            }
+
+            .bottom-tagline {
+                font-size: clamp(14pt, 3.5vw, 24pt);
+            }
+
+            .author-name {
+                font-size: clamp(18pt, 5vw, 32pt);
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                width: 100%;
+                max-width: 100%;
+                padding: 0;
+            }
+
+            .cover {
+                width: 100vw;
+                height: 100vh;
+                margin: 0;
+                page-break-after: always;
+            }
+
+            .specifications {
+                display: none;
+            }
+        }
+
+        /* Specifications section */
+        .specifications {
+            background: #f5f5f5;
+            padding: 30px;
+            border-radius: 4px;
+            margin-top: 30px;
+            border-left: 4px solid #d4af37;
+        }
+
+        .specifications h3 {
+            color: #2d1b4e;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 14pt;
+        }
+
+        .specifications h3:first-child {
+            margin-top: 0;
+        }
+
+        .specifications p,
+        .specifications li {
+            color: #4a2c5e;
+            font-size: 11pt;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .specifications ul {
+            list-style-position: inside;
+            margin-left: 10px;
+        }
+
+        .specifications code {
+            background: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 10pt;
+        }
+
+        .color-swatch {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            margin: 0 5px;
+            vertical-align: middle;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-title">Phoenix Rising - Journal 3 Cover (8.5×8.5" Square Premium Format)</div>
+
+    <div class="container">
+        <!-- Cover Design -->
+        <div class="cover">
+            <div class="cover-content">
+                <!-- Phoenix Icon -->
+                <div class="phoenix-icon">🔥</div>
+
+                <!-- Top Tagline -->
+                <div class="top-tagline">
+                    Your Journey. Your Growth.<br>
+                    Your Transformation.
+                </div>
+
+                <!-- Main Title -->
+                <div class="title">Phoenix Rising</div>
+
+                <!-- Decorative Subtitle -->
+                <div class="subtitle">A Journal of Healing, Transformation & Renewal</div>
+
+                <!-- Description -->
+                <div class="description">
+                    Rise from within. Shine forever.
+                </div>
+
+                <!-- Keywords -->
+                <div class="keywords">
+                    <span>✦ Release the Past & Heal Your Heart</span>
+                    <span>✦ Build Self-Love & Inner Confidence</span>
+                    <span>✦ Dream, Believe & Create with Purpose</span>
+                    <span>✦ Grow, Take Action & Rise</span>
+                    <span>✦ Reflect, Celebrate & Renew</span>
+                </div>
+
+                <!-- Bottom Tagline -->
+                <div class="bottom-tagline">
+                    Let go. Rise. Renew.
+                    <div class="tagline-emphasis">Your Phoenix Life Begins Now</div>
+                </div>
+
+                <!-- Heart Icon -->
+                <div class="heart">💗</div>
+
+                <!-- Author & Publisher -->
+                <div class="author-section">
+                    <div class="author-name">Taru Sunwhisper</div>
+                    <div class="publisher">TKALLA CREATIONS</div>
+                    <div style="font-size: 14pt; color: #c9a961; margin-top: 10px; letter-spacing: 1px;">Made with Heart, Made to Inspire</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Specifications -->
+        <div class="specifications">
+            <h3>📋 Phoenix Rising Journal Cover Specifications</h3>
+
+            <h3>Physical Specifications</h3>
+            <ul>
+                <li><strong>Trim Size:</strong> 8.5" × 8.5" (2550 × 2550px @ 300 DPI) - Premium Square Format</li>
+                <li><strong>Page Count:</strong> 126 pages</li>
+                <li><strong>Spine Width:</strong> 0.06" (18px @ 300 DPI)</li>
+                <li><strong>Paper Stock:</strong> White Paper, Glossy Finish</li>
+                <li><strong>Color:</strong> Premium Color</li>
+                <li><strong>Bleed:</strong> ON (0.125" on all sides)</li>
+                <li><strong>Safe Area:</strong> 0.25" from edges</li>
+            </ul>
+
+            <h3>Color Palette (CMYK for Print)</h3>
+            <ul>
+                <li><strong>Deep Purple:</strong> <span class="color-swatch" style="background: #2d1b4e;"></span> #2d1b4e - C: 80%, M: 75%, Y: 20%, K: 40%</li>
+                <li><strong>Medium Purple:</strong> <span class="color-swatch" style="background: #6b3d5f;"></span> #6b3d5f - C: 60%, M: 70%, Y: 15%, K: 20%</li>
+                <li><strong>Gold Accent:</strong> <span class="color-swatch" style="background: #d4af37;"></span> #d4af37 - C: 15%, M: 25%, Y: 80%, K: 5%</li>
+                <li><strong>Rose Gold:</strong> <span class="color-swatch" style="background: #f5d5b8;"></span> #f5d5b8 - C: 10%, M: 20%, Y: 35%, K: 0%</li>
+                <li><strong>Light Accent:</strong> <span class="color-swatch" style="background: #e8d9c3;"></span> #e8d9c3 - C: 12%, M: 18%, Y: 28%, K: 0%</li>
+            </ul>
+
+            <h3>Typography</h3>
+            <ul>
+                <li><strong>Main Title Font:</strong> Georgia or high-end serif (elegant, italicized)</li>
+                <li><strong>Author Name:</strong> Elegant script/italic serif</li>
+                <li><strong>Text:</strong> Mix of serif and elegant fonts</li>
+                <li><strong>Title Size:</strong> 140pt for maximum impact</li>
+                <li><strong>Taglines:</strong> 24-32pt for readability</li>
+            </ul>
+
+            <h3>Design Elements</h3>
+            <ul>
+                <li>✦ Phoenix or fire imagery as focal point</li>
+                <li>♡ Heart accents throughout (inspiration, healing)</li>
+                <li>✦ Ornate dividers and decorative flourishes</li>
+                <li>✦ Gradient background (deep purple to golden sunset tones)</li>
+                <li>✦ Glowing/luminous effects on text and elements</li>
+                <li>✦ Mystical, transformational energy</li>
+            </ul>
+
+            <h3>Key Design Principles</h3>
+            <ul>
+                <li>✦ Centered, balanced composition</li>
+                <li>✦ Luxurious, premium aesthetic</li>
+                <li>✦ Warm, inviting color transitions</li>
+                <li>✦ Mystical and transformational theme</li>
+                <li>✦ Inspirational and empowering messaging</li>
+                <li>✦ High contrast for readability on glossy paper</li>
+            </ul>
+
+            <h3>Production Notes</h3>
+            <ul>
+                <li>✓ Embed all fonts in final PDF</li>
+                <li>✓ Convert to CMYK color space before submission</li>
+                <li>✓ Test on glossy finish - colors will be vibrant and saturated</li>
+                <li>✓ Ensure text contrast is sufficient (gold on light background works well)</li>
+                <li>✓ Keep important content within safe area</li>
+                <li>✓ Use KDP's cover previewer before final upload</li>
+            </ul>
+
+            <h3>Next Steps</h3>
+            <ol style="margin-left: 20px; margin-top: 10px;">
+                <li>Refine and customize this design with actual phoenix/mystical artwork</li>
+                <li>Adjust colors and imagery to match your vision</li>
+                <li>Export as high-resolution PDF (300+ DPI)</li>
+                <li>Embed all fonts (Georgia, elegant serif)</li>
+                <li>Convert colors to CMYK for print accuracy</li>
+                <li>Upload to Amazon KDP and preview</li>
+                <li>Submit for production</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>
