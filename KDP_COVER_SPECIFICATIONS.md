@@ -6,14 +6,16 @@ This document outlines the complete cover design specifications for Journal 3 ac
 ## Physical Specifications
 
 ### Trim Size
-- **Dimensions:** 6" × 9" (inches)
-- **In pixels (300 DPI):** 1800 × 2700 pixels
-- **Aspect Ratio:** 2:3
+- **Dimensions:** 8.5" × 8.5" (inches) - Premium Square Format
+- **In pixels (300 DPI):** 2550 × 2550 pixels
+- **Aspect Ratio:** 1:1 (Square)
 
 ### Resolution & Color
-- **Resolution:** 300 DPI minimum (mandatory for print quality)
-- **Color Mode:** CMYK for best print results (RGB will be converted by KDP)
+- **Resolution:** 300 DPI minimum (mandatory for premium quality)
+- **Color Mode:** Premium Color with CMYK for best print results (RGB will be converted)
 - **File Format:** PDF (preferred) or high-resolution image files
+- **Paper Stock:** White Paper, Glossy Finish
+- **Bleed:** ON (Enabled)
 
 ### Bleed & Safe Areas
 - **Bleed Area:** 0.125" (37.5px @ 300 DPI) on all sides
@@ -30,7 +32,7 @@ This document outlines the complete cover design specifications for Journal 3 ac
 
 ### Cover Components
 
-#### Front Cover (6" × 9")
+#### Front Cover (8.5" × 8.5" - Square Premium Format)
 - **Title:** "Journal 3"
 - **Subtitle:** "My Reflections"
 - **Tagline:** "A Year of Growth, Gratitude & Purpose"
@@ -40,7 +42,7 @@ This document outlines the complete cover design specifications for Journal 3 ac
   - Professional typography hierarchy
   - Color scheme: Navy/slate background with white and gold accents
 
-#### Back Cover (6" × 9")
+#### Back Cover (8.5" × 8.5" - Square Premium Format)
 **Required Elements:**
 - Author description or about section
 - Testimonials or benefits list
@@ -50,8 +52,8 @@ This document outlines the complete cover design specifications for Journal 3 ac
 
 #### Spine
 - **Width Calculation:** (Total Page Count × Paper Thickness) + 0.02"
-  - For 365 pages with 80 gsm paper: ~0.27"
-  - For 200 pages with 80 gsm paper: ~0.15"
+  - For 126 pages with standard white paper: ~0.06" (18px @ 300 DPI)
+  - Formula: (126 pages × 0.0003") + 0.02" = 0.0578" ≈ 0.06"
 - **Spine Text:** Oriented vertically (spine text should be readable when spine faces up)
 - **Required Spacing:** 0.125" from edges on spine
 
@@ -95,11 +97,34 @@ This document outlines the complete cover design specifications for Journal 3 ac
 - **White space:** Generous margins and breathing room
 - **Visual balance:** Symmetrical design with decorative elements
 
+## Premium Print Options
+
+### Paper & Finish Specifications
+- **Paper Stock:** White Paper (Premium)
+- **Finish:** Glossy (High-shine, vibrant color reproduction)
+- **Bleed:** ON (Enabled for full-bleed design capability)
+- **Page Count:** 126 pages
+- **Spine Width:** ~0.06" (18px @ 300 DPI)
+
+### Premium Color Benefits
+- Enhanced color vibrancy and saturation
+- Professional glossy finish provides elegant appearance
+- White paper ensures optimal color reproduction
+- Glossy coating protects cover during handling
+- Ideal for illustrated journals with visual appeal
+
+### Quality Recommendations for Glossy Finish
+- Increase contrast to 110-120% for optimal print result
+- Use high-saturation colors (avoid pastels on glossy)
+- Ensure text has sufficient contrast against background
+- Test color output on glossy test prints before final submission
+- Consider matte text overlays for readability if needed
+
 ## Quality Checklist
 
 Before submitting to KDP:
 
-- [ ] File is 6" × 9" (1800 × 2700px at 300 DPI)
+- [ ] File is 8.5" × 8.5" (2550 × 2550px at 300 DPI)
 - [ ] 0.125" bleed area on all sides included
 - [ ] All critical content within 0.25" safe area
 - [ ] Resolution is minimum 300 DPI
