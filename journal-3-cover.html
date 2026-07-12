@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal 3 - Amazon KDP Cover</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Cover dimensions: 6x9 inches at 300 DPI = 1800x2700px */
+        .cover {
+            width: 1800px;
+            height: 2700px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14pt;
+        }
+
+        /* Bleed area indicator (0.125" = 37.5px at 300 DPI) */
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 37.5px;
+            left: 37.5px;
+            right: 37.5px;
+            bottom: 37.5px;
+            border: 1px solid rgba(255,255,255,0.1);
+            pointer-events: none;
+        }
+
+        /* Safe area indicator (0.25" = 75px from edge) */
+        .cover::after {
+            content: '';
+            position: absolute;
+            top: 75px;
+            left: 75px;
+            right: 75px;
+            bottom: 75px;
+            border: 1px dashed rgba(255,255,255,0.05);
+            pointer-events: none;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 150px 100px;
+            max-width: 1200px;
+        }
+
+        .decorative-top {
+            width: 400px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #f39c12, transparent);
+            margin: 0 auto 80px;
+            opacity: 0.8;
+        }
+
+        .subtitle {
+            font-size: 32pt;
+            font-weight: normal;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #bdc3c7;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .title {
+            font-size: 120pt;
+            font-weight: bold;
+            line-height: 1.2;
+            margin: 60px 0;
+            letter-spacing: -2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .title-number {
+            display: block;
+            font-size: 140pt;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            margin: 20px 0;
+        }
+
+        .tagline {
+            font-size: 28pt;
+            font-style: italic;
+            color: #bdc3c7;
+            margin: 60px 0 80px;
+            letter-spacing: 1px;
+            line-height: 1.4;
+        }
+
+        .decorative-bottom {
+            width: 400px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #f39c12, transparent);
+            margin: 80px auto 0;
+            opacity: 0.8;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 60px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 18pt;
+            color: #95a5a6;
+            letter-spacing: 1px;
+        }
+
+        /* Back cover */
+        .back-cover {
+            display: none;
+        }
+
+        /* Print guidelines note */
+        .guidelines {
+            margin-top: 40px;
+            padding: 20px;
+            background: #ecf0f1;
+            border-left: 4px solid #3498db;
+            color: #2c3e50;
+            font-size: 11pt;
+            line-height: 1.6;
+        }
+
+        .guidelines h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .guidelines ul {
+            list-style-position: inside;
+            margin-left: 10px;
+        }
+
+        .guidelines li {
+            margin-bottom: 8px;
+        }
+
+        .guidelines code {
+            background: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 10pt;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .cover {
+                width: 100vw;
+                height: 100vh;
+                margin: 0;
+                page-break-after: always;
+            }
+
+            .guidelines {
+                display: none;
+            }
+        }
+
+        /* Responsive for screen preview */
+        @media (max-width: 1400px) {
+            .cover {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 6 / 9;
+                min-height: 600px;
+            }
+
+            .cover-content {
+                padding: 60px 40px;
+            }
+
+            .title {
+                font-size: clamp(40pt, 15vw, 120pt);
+            }
+
+            .title-number {
+                font-size: clamp(50pt, 18vw, 140pt);
+            }
+
+            .subtitle {
+                font-size: clamp(16pt, 5vw, 32pt);
+            }
+
+            .tagline {
+                font-size: clamp(14pt, 4vw, 28pt);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cover">
+            <div class="cover-content">
+                <div class="decorative-top"></div>
+
+                <div class="subtitle">My Reflections</div>
+
+                <div class="title">
+                    Journal
+                    <span class="title-number">3</span>
+                </div>
+
+                <div class="tagline">A Year of Growth, Gratitude & Purpose</div>
+
+                <div class="decorative-bottom"></div>
+            </div>
+
+            <div class="footer">
+                <div style="margin-top: 20px; font-size: 14pt;">Guided Journal & Reflection</div>
+            </div>
+        </div>
+
+        <div class="guidelines">
+            <h3>Amazon KDP Print Journal Cover Specifications</h3>
+            <ul>
+                <li><strong>Trim Size:</strong> 6" × 9" (standard journal size)</li>
+                <li><strong>Resolution:</strong> 300 DPI minimum for print quality</li>
+                <li><strong>Color Mode:</strong> CMYK for print (or RGB converted to CMYK)</li>
+                <li><strong>File Format:</strong> PDF recommended for upload</li>
+                <li><strong>Bleed Area:</strong> 0.125" (37.5px @ 300 DPI) on all sides</li>
+                <li><strong>Safe Area:</strong> 0.25" (75px @ 300 DPI) from edges - keep important content here</li>
+                <li><strong>Page Count:</strong> Must include front cover, back cover, and spine</li>
+                <li><strong>Font Embedding:</strong> Embed all fonts in PDF to ensure correct display</li>
+                <li><strong>Margins:</strong> Content should stay within safe area to avoid cutoff</li>
+                <li><strong>Spine Width Calculation:</strong> (Page Count × Paper Thickness) + Cover Thickness</li>
+            </ul>
+
+            <h3 style="margin-top: 20px;">Design Best Practices</h3>
+            <ul>
+                <li>Use high-contrast text for readability on printed materials</li>
+                <li>Test with KDP's cover previewer before final submission</li>
+                <li>Avoid thin lines or small text that may not print clearly</li>
+                <li>Ensure back cover has ISBN barcode placement area (2" × 2")</li>
+                <li>Maintain consistent branding and professional appearance</li>
+                <li>Use standard fonts (Georgia, Times New Roman, Arial, Helvetica)</li>
+            </ul>
+
+            <h3 style="margin-top: 20px;">Files Included</h3>
+            <ul>
+                <li><code>journal-3-cover.html</code> - This editable cover design (6×9", 300 DPI @ web scale)</li>
+                <li>Generate PDF for Amazon KDP upload using "Print to PDF" or a design tool</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal 3 - Complete KDP Cover (Front + Spine + Back)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #1a1a1a;
+            padding: 40px 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            color: #95a5a6;
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        /* Complete cover layout: Front + Spine + Back */
+        /* For 200 pages with standard paper: spine = ~0.15" = 45px @ 300 DPI */
+        .complete-cover {
+            display: flex;
+            width: 100%;
+            background: white;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }
+
+        .cover-section {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 12pt;
+        }
+
+        /* Front Cover: 6" x 9" (1800 x 2700px at 300 DPI) */
+        .front-cover {
+            width: 1800px;
+            height: 2700px;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+        }
+
+        /* Spine: 0.15" x 9" (45px x 2700px at 300 DPI) for 200 pages */
+        .spine {
+            width: 45px;
+            height: 2700px;
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            padding: 20px 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            transform: rotate(180deg);
+        }
+
+        /* Back Cover: 6" x 9" (1800 x 2700px at 300 DPI) */
+        .back-cover {
+            width: 1800px;
+            height: 2700px;
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+        }
+
+        /* Bleed area indicator */
+        .cover-section::before {
+            content: '';
+            position: absolute;
+            top: 37.5px;
+            left: 37.5px;
+            right: 37.5px;
+            bottom: 37.5px;
+            border: 1px solid rgba(255,255,255,0.1);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Safe area indicator */
+        .cover-section::after {
+            content: '';
+            position: absolute;
+            top: 75px;
+            left: 75px;
+            right: 75px;
+            bottom: 75px;
+            border: 1px dashed rgba(255,255,255,0.05);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .cover-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 150px 100px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Front Cover Content */
+        .front-cover .cover-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .decorative-line {
+            width: 400px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #f39c12, transparent);
+            margin: 0 auto;
+            opacity: 0.8;
+        }
+
+        .subtitle {
+            font-size: 32pt;
+            font-weight: normal;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #bdc3c7;
+            margin: 80px 0 40px 0;
+            opacity: 0.9;
+        }
+
+        .title {
+            font-size: 120pt;
+            font-weight: bold;
+            line-height: 1.2;
+            letter-spacing: -2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .title-number {
+            display: block;
+            font-size: 140pt;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: none;
+            margin: 20px 0;
+        }
+
+        .tagline {
+            font-size: 28pt;
+            font-style: italic;
+            color: #bdc3c7;
+            margin: 60px 0 80px;
+            letter-spacing: 1px;
+            line-height: 1.4;
+        }
+
+        .footer-text {
+            font-size: 18pt;
+            color: #95a5a6;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+
+        /* Back Cover Content */
+        .back-cover .cover-content {
+            padding: 100px 80px;
+            align-items: flex-start;
+            justify-content: flex-start;
+            text-align: left;
+        }
+
+        .back-cover-section {
+            margin-bottom: 60px;
+            max-width: 1400px;
+        }
+
+        .back-title {
+            font-size: 36pt;
+            font-weight: bold;
+            color: #f39c12;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .back-description {
+            font-size: 18pt;
+            line-height: 1.8;
+            color: #ecf0f1;
+            margin-bottom: 40px;
+        }
+
+        .back-subtitle {
+            font-size: 24pt;
+            font-weight: bold;
+            color: #f39c12;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
+        .back-list {
+            font-size: 16pt;
+            line-height: 2;
+            color: #bdc3c7;
+            margin-left: 30px;
+        }
+
+        .back-list li {
+            margin-bottom: 15px;
+        }
+
+        .isbn-area {
+            position: absolute;
+            bottom: 75px;
+            right: 75px;
+            width: 600px;
+            height: 600px;
+            border: 2px dashed rgba(255,165,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14pt;
+            color: rgba(255,165,0,0.4);
+            text-align: center;
+            padding: 20px;
+        }
+
+        .isbn-placeholder {
+            font-size: 12pt;
+            letter-spacing: 1px;
+        }
+
+        /* Spine Content Placeholder */
+        .spine-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+        }
+
+        /* Responsive for screen display */
+        @media (max-width: 2000px) {
+            .complete-cover {
+                flex-direction: column;
+                transform: scale(0.4);
+                transform-origin: top left;
+                width: 100%;
+            }
+
+            .cover-section {
+                width: 100%;
+            }
+
+            .front-cover,
+            .back-cover {
+                width: 100%;
+                aspect-ratio: 6 / 9;
+            }
+
+            .spine {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1 / 60;
+                writing-mode: horizontal-tb;
+            }
+        }
+
+        /* Spec info box */
+        .specifications {
+            background: #ecf0f1;
+            padding: 30px;
+            border-radius: 4px;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+        }
+
+        .specifications h3 {
+            color: #2c3e50;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 14pt;
+        }
+
+        .specifications h3:first-child {
+            margin-top: 0;
+        }
+
+        .specifications p,
+        .specifications li {
+            color: #34495e;
+            font-size: 11pt;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .specifications ul {
+            list-style-position: inside;
+            margin-left: 10px;
+        }
+
+        .specifications code {
+            background: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 10pt;
+        }
+
+        .spec-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .spec-item {
+            background: white;
+            padding: 15px;
+            border-radius: 3px;
+            border-left: 3px solid #3498db;
+        }
+
+        .spec-item strong {
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .spec-item span {
+            color: #7f8c8d;
+            font-size: 10pt;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-title">Journal 3 - Complete KDP Cover Template (Front + Spine + Back)</div>
+
+    <div class="container">
+        <!-- Complete Cover Display -->
+        <div class="complete-cover">
+            <!-- Front Cover -->
+            <div class="cover-section front-cover">
+                <div class="cover-content">
+                    <div class="decorative-line"></div>
+
+                    <div class="subtitle">My Reflections</div>
+
+                    <div class="title">
+                        Journal
+                        <span class="title-number">3</span>
+                    </div>
+
+                    <div class="tagline">A Year of Growth, Gratitude & Purpose</div>
+
+                    <div class="decorative-line"></div>
+
+                    <div class="footer-text">Guided Journal & Reflection</div>
+                </div>
+            </div>
+
+            <!-- Spine (for ~200 pages at standard thickness) -->
+            <div class="cover-section spine">
+                <div class="spine-content">Journal 3</div>
+            </div>
+
+            <!-- Back Cover -->
+            <div class="cover-section back-cover">
+                <div class="cover-content">
+                    <div class="back-cover-section">
+                        <div class="back-title">Journal 3</div>
+
+                        <div class="back-description">
+                            Begin your journey of self-discovery and meaningful reflection with Journal 3.
+                            This guided journal is designed to help you cultivate gratitude, set intentions,
+                            and track your personal growth throughout the year. Each day offers space for
+                            your thoughts, dreams, and accomplishments.
+                        </div>
+
+                        <div class="back-subtitle">Inside You'll Find:</div>
+                        <ul class="back-list">
+                            <li>Daily reflection prompts for deeper self-awareness</li>
+                            <li>Gratitude sections to shift your perspective</li>
+                            <li>Goal tracking pages for accountability</li>
+                            <li>Guided meditations and mindfulness exercises</li>
+                            <li>Progress tracking and milestone celebrations</li>
+                            <li>Spacious pages for authentic expression</li>
+                        </ul>
+
+                        <div class="back-subtitle">Perfect For:</div>
+                        <ul class="back-list">
+                            <li>Personal growth and development</li>
+                            <li>Daily mindfulness practice</li>
+                            <li>Setting and achieving meaningful goals</li>
+                            <li>Cultivating a gratitude practice</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ISBN Barcode Area (2" x 2" = 600px x 600px @ 300 DPI) -->
+                <div class="isbn-area">
+                    <div class="isbn-placeholder">
+                        Place ISBN Barcode<br>Here<br>(2" × 2")
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Specifications Section -->
+        <div class="specifications">
+            <h3>📋 Cover Specifications</h3>
+
+            <div class="spec-grid">
+                <div class="spec-item">
+                    <strong>Trim Size</strong>
+                    <span>6" × 9" (1800 × 2700px @ 300 DPI)</span>
+                </div>
+                <div class="spec-item">
+                    <strong>Resolution</strong>
+                    <span>300 DPI Minimum</span>
+                </div>
+                <div class="spec-item">
+                    <strong>Color Mode</strong>
+                    <span>CMYK (or RGB to convert)</span>
+                </div>
+                <div class="spec-item">
+                    <strong>File Format</strong>
+                    <span>PDF (Recommended)</span>
+                </div>
+                <div class="spec-item">
+                    <strong>Bleed Area</strong>
+                    <span>0.125" (37.5px) on all sides</span>
+                </div>
+                <div class="spec-item">
+                    <strong>Safe Area</strong>
+                    <span>0.25" (75px) from edges</span>
+                </div>
+            </div>
+
+            <h3>📐 Complete Cover Dimensions</h3>
+            <p>
+                <strong>Total Width:</strong> Back Cover (6") + Spine (0.15" for ~200 pages) + Front Cover (6") = 12.15" (3645px @ 300 DPI)<br>
+                <strong>Height:</strong> 9" (2700px @ 300 DPI)<br>
+                <strong>Spine Width Note:</strong> Adjust based on page count: (Page Count × 0.0003") + 0.02"
+            </p>
+
+            <h3>✅ Pre-Submission Checklist</h3>
+            <ul>
+                <li>Front cover has eye-catching design and clear title</li>
+                <li>Back cover includes: description, benefits, barcode area (2" × 2")</li>
+                <li>Spine includes book title and is readable when spine faces up</li>
+                <li>All text is within safe area (0.25" from edges)</li>
+                <li>Resolution is 300 DPI minimum</li>
+                <li>File is PDF with embedded fonts</li>
+                <li>Color is CMYK or RGB (will convert to CMYK)</li>
+                <li>ISBN barcode area is clear on back cover (right side, bottom)</li>
+                <li>No important content extends into bleed area</li>
+                <li>Tested with KDP cover previewer</li>
+            </ul>
+
+            <h3>🎨 Design Elements Used</h3>
+            <ul>
+                <li><strong>Primary Color:</strong> Navy Blue (#2c3e50)</li>
+                <li><strong>Secondary Color:</strong> Slate Blue (#34495e)</li>
+                <li><strong>Accent Color:</strong> Gold (#f39c12)</li>
+                <li><strong>Text Color:</strong> White/Off-white (#ecf0f1)</li>
+                <li><strong>Font Family:</strong> Georgia (serif), Professional sans-serif</li>
+                <li><strong>Design Style:</strong> Modern, elegant, professional</li>
+            </ul>
+
+            <h3>📝 Next Steps</h3>
+            <ol style="margin-left: 20px; margin-top: 10px;">
+                <li>Customize text and colors to match your brand</li>
+                <li>Add your author bio and photo to back cover</li>
+                <li>Calculate exact spine width: (total pages × paper thickness) + cover thickness</li>
+                <li>Export as PDF: Print → Save as PDF at 300 DPI</li>
+                <li>Embed fonts before uploading to KDP</li>
+                <li>Upload to Amazon KDP and use their cover previewer</li>
+                <li>Review and approve in KDP dashboard</li>
+            </ol>
+
+            <h3>🔗 Resources</h3>
+            <ul>
+                <li><strong>KDP Help:</strong> https://kdp.amazon.com/en_US/help/topic/G202151810</li>
+                <li><strong>Print Book Specifications:</strong> https://kdp.amazon.com/en_US/help/topic/G201895840</li>
+                <li><strong>Cover Dimensions Calculator:</strong> https://kdp.amazon.com/en_US/help/topic/G201834540</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
