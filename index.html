@@ -525,6 +525,87 @@
             transform: translateY(0);
         }
 
+        /* Music Player */
+        .music-player-container {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            z-index: 100;
+            width: 280px;
+        }
+
+        .music-player {
+            background: linear-gradient(135deg, rgba(196, 30, 58, 0.15) 0%, rgba(75, 0, 130, 0.12) 100%);
+            border: 2px solid rgba(196, 30, 58, 0.4);
+            border-radius: 12px;
+            padding: 15px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 20px rgba(196, 30, 58, 0.15);
+        }
+
+        .player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            color: #d4a574;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .player-toggle {
+            background: rgba(196, 30, 58, 0.3);
+            border: 1px solid rgba(196, 30, 58, 0.5);
+            color: #c41e3a;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .player-toggle:hover {
+            background: rgba(196, 30, 58, 0.5);
+            box-shadow: 0 0 8px rgba(196, 30, 58, 0.3);
+        }
+
+        .player-controls {
+            display: flex;
+            justify-content: space-around;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .control-btn {
+            background: rgba(196, 30, 58, 0.2);
+            border: 1px solid rgba(196, 30, 58, 0.4);
+            color: #c41e3a;
+            padding: 6px 8px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: rgba(196, 30, 58, 0.4);
+            box-shadow: 0 0 8px rgba(196, 30, 58, 0.2);
+        }
+
+        .current-song {
+            color: #b0a8a0;
+            font-size: 0.85rem;
+            text-align: center;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .poem-container {
@@ -558,6 +639,29 @@
             .rose-divider {
                 font-size: 1.4rem;
                 letter-spacing: 10px;
+            }
+
+            .music-player-container {
+                bottom: 70px;
+                left: 10px;
+                width: 250px;
+            }
+
+            .music-player {
+                padding: 12px;
+            }
+
+            .player-header {
+                font-size: 0.85rem;
+            }
+
+            .control-btn {
+                font-size: 0.75rem;
+                padding: 4px 6px;
+            }
+
+            .current-song {
+                font-size: 0.75rem;
             }
         }
     </style>
@@ -782,9 +886,28 @@
         </div>
     </section>
 
+    <!-- Background Music Player -->
+    <div class="music-player-container">
+        <div class="music-player">
+            <div class="player-header">
+                <span class="player-title">🎵 Background Music</span>
+                <button id="playerToggle" class="player-toggle">▶</button>
+            </div>
+            <audio id="bgMusic" loop>
+                <source src="background-music.mp3" type="audio/mpeg">
+            </audio>
+            <div class="player-controls">
+                <button id="prevBtn" class="control-btn">⏮</button>
+                <button id="playPauseBtn" class="control-btn">▶</button>
+                <button id="nextBtn" class="control-btn">⏭</button>
+            </div>
+            <div id="currentSong" class="current-song">Ready to play...</div>
+        </div>
+    </div>
+
     <!-- Music Info -->
     <div class="music-info">
-        <p>🎵 Dark romance awaits...</p>
+        <p>🎵 Dark romance awaits...<br><small>Music player in bottom left ♪</small></p>
     </div>
 
     <script>
@@ -793,7 +916,7 @@
         for (let i = 1; i <= 51; i++) {
             const img = document.createElement('div');
             img.className = 'gallery-item';
-            img.innerHTML = `<img src="vu2nd/${i}.png" alt="Memory ${i}" loading="lazy">`;
+            img.innerHTML = `<img src="vu2nd/${i}.png" alt="Memory ${i}" loading="lazy" onerror="console.warn('Failed to load image', i)">`;
             galleryContainer.appendChild(img);
         }
 
@@ -812,19 +935,74 @@
         window.addEventListener('scroll', revealOnScroll);
         revealOnScroll();
 
-        // Music playlist
+        // Music playlist (YouTube links for reference - download and convert to MP3)
         const playlist = [
-            'https://youtu.be/_MVWrTgoJIk',
-            'https://youtu.be/CGj8uWROTFo',
-            'https://youtu.be/iZ9dkLr5Kv0',
-            'https://youtu.be/9nPMihiD1Rw',
-            'https://youtu.be/syFZfO_wfMQ',
-            'https://youtu.be/29RTLrPDJzc',
-            'https://youtu.be/kV6cXrevo8s',
-            'https://youtu.be/Vnrbdn7NLvM'
+            { title: 'Song 1', link: 'https://youtu.be/_MVWrTgoJIk' },
+            { title: 'Song 2', link: 'https://youtu.be/CGj8uWROTFo' },
+            { title: 'Song 3', link: 'https://youtu.be/iZ9dkLr5Kv0' },
+            { title: 'Song 4', link: 'https://youtu.be/9nPMihiD1Rw' },
+            { title: 'Song 5', link: 'https://youtu.be/syFZfO_wfMQ' },
+            { title: 'Song 6', link: 'https://youtu.be/29RTLrPDJzc' },
+            { title: 'Song 7', link: 'https://youtu.be/kV6cXrevo8s' },
+            { title: 'Song 8', link: 'https://youtu.be/Vnrbdn7NLvM' }
         ];
 
+        // Music player functionality
+        const bgMusic = document.getElementById('bgMusic');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const playerToggle = document.getElementById('playerToggle');
+        const currentSongDisplay = document.getElementById('currentSong');
+        let isPlaying = false;
+
+        // Try to load background music
+        bgMusic.addEventListener('loadstart', () => {
+            console.log('🎵 Loading background music...');
+        });
+
+        bgMusic.addEventListener('canplay', () => {
+            console.log('✅ Background music ready');
+            currentSongDisplay.textContent = '♪ Ambiance Playing...';
+        });
+
+        bgMusic.addEventListener('error', () => {
+            console.log('🎵 Background music file not found - create background-music.mp3');
+            currentSongDisplay.textContent = '🎵 Add background-music.mp3';
+        });
+
+        playPauseBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (isPlaying) {
+                bgMusic.pause();
+                playPauseBtn.textContent = '▶';
+                playerToggle.textContent = '▶';
+            } else {
+                bgMusic.play();
+                playPauseBtn.textContent = '⏸';
+                playerToggle.textContent = '⏸';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        playerToggle.addEventListener('click', () => {
+            playPauseBtn.click();
+        });
+
+        // Auto-play background music when page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                bgMusic.play().catch(err => {
+                    console.log('Auto-play blocked:', err);
+                });
+            }, 2000);
+        });
+
         console.log('✨ Dark romance website loaded...');
+        console.log('📝 To add background music:');
+        console.log('1. Download the songs from the YouTube links');
+        console.log('2. Convert to MP3 format');
+        console.log('3. Save as background-music.mp3 in the same folder');
+        console.log('🎵 Playlist available in console: window.playlist');
+        window.playlist = playlist;
     </script>
 
 </body>
