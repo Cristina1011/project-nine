@@ -445,93 +445,107 @@
             border-top: 1px solid rgba(212, 175, 55, 0.2);
         }
 
-        .timeline {
-            max-width: 900px;
+        .timeline-container {
+            max-width: 1200px;
             margin: 0 auto;
-            position: relative;
         }
 
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 30px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, #d4af37, rgba(212, 175, 55, 0.2));
-            animation: lineGrow 1.2s ease forwards;
-        }
-
-        @keyframes lineGrow {
-            from { height: 0; }
-            to { height: 100%; }
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
         }
 
         .timeline-item {
-            display: flex;
-            gap: 40px;
-            margin-bottom: 80px;
-            position: relative;
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
             opacity: 0;
-            animation: slideInLeft 0.8s ease forwards;
+            animation: fadeInScale 0.6s ease forwards;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
         }
 
-        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
-        .timeline-item:nth-child(2) { animation-delay: 0.3s; }
-        .timeline-item:nth-child(3) { animation-delay: 0.5s; }
-        .timeline-item:nth-child(4) { animation-delay: 0.7s; }
+        .timeline-item:hover {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: #d4af37;
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.25);
+        }
 
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-30px); }
-            to { opacity: 1; transform: translateX(0); }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.05s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.15s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.25s; }
+        .timeline-item:nth-child(n+6) { animation-delay: calc(0.05s * (n - 5)); }
+
+        .timeline-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #12050d, #1f0f2a);
+            position: relative;
+        }
+
+        .timeline-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .timeline-item:hover .timeline-image img {
+            transform: scale(1.08) rotate(1deg);
+        }
+
+        .timeline-content {
+            padding: 20px;
         }
 
         .timeline-dot {
-            width: 24px;
-            height: 24px;
+            width: 16px;
+            height: 16px;
             background: #d4af37;
             border-radius: 50%;
-            margin-top: 5px;
-            flex-shrink: 0;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
             animation: pulse 2s ease-in-out infinite;
-            position: relative;
+            position: absolute;
+            top: -8px;
+            left: 15px;
             z-index: 10;
         }
 
         @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.3); }
-            50% { box-shadow: 0 0 50px rgba(212, 175, 55, 0.9), inset 0 0 15px rgba(255, 255, 255, 0.5); }
-        }
-
-        .timeline-content {
-            flex: 1;
-            padding: 20px;
-            background: rgba(212, 175, 55, 0.08);
-            border-left: 2px solid #d4af37;
-            border-radius: 8px;
-            transition: all 0.4s ease;
-        }
-
-        .timeline-item:hover .timeline-content {
-            background: rgba(212, 175, 55, 0.15);
-            transform: translateX(10px);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.6), inset 0 0 8px rgba(255, 255, 255, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.9), inset 0 0 12px rgba(255, 255, 255, 0.5); }
         }
 
         .timeline-date {
             color: #d4af37;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             letter-spacing: 2px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             font-weight: 600;
             text-transform: uppercase;
+            display: inline-block;
+            padding: 6px 12px;
+            background: rgba(212, 175, 55, 0.15);
+            border-radius: 4px;
         }
 
         .timeline-text {
             color: #e8d4c4;
-            line-height: 1.8;
-            font-size: 0.95rem;
+            line-height: 1.6;
+            font-size: 0.9rem;
         }
 
         /* Music Player */
@@ -749,34 +763,304 @@
 
     <!-- Timeline Section -->
     <section class="timeline-section" id="timeline">
-        <h2 class="section-title">Our Journey</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <div class="timeline-date">AUGUST 2023</div>
-                    <div class="timeline-text">You entered my life like destiny. IMVU was just a place, but you were different.</div>
+        <h2 class="section-title">36 Months of Forever</h2>
+        <div class="timeline-container">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/1.png" alt="August 2023"></div>
+                        <div class="timeline-date">AUG 2023</div>
+                        <div class="timeline-text">First Meeting. You entered my world.</div>
+                    </div>
                 </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <div class="timeline-date">OCTOBER 2024</div>
-                    <div class="timeline-text">My birthday. You made it unforgettable. Tiramisu, your love, and a plushie that holds memories.</div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/5.png" alt="September 2023"></div>
+                        <div class="timeline-date">SEP 2023</div>
+                        <div class="timeline-text">Falling deeper. Every moment with you.</div>
+                    </div>
                 </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <div class="timeline-date">DECEMBER 2024</div>
-                    <div class="timeline-text">Winter built us a world. Northern Lights, snow, and the home you created for us.</div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/10.png" alt="October 2023"></div>
+                        <div class="timeline-date">OCT 2023</div>
+                        <div class="timeline-text">My birthday. You made it unforgettable.</div>
+                    </div>
                 </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-content">
-                    <div class="timeline-date">AUGUST 2026</div>
-                    <div class="timeline-text">Three years later. Still choosing us. Still my devil. Still forever.</div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/15.png" alt="November 2023"></div>
+                        <div class="timeline-date">NOV 2023</div>
+                        <div class="timeline-text">Grateful for every moment together.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/20.png" alt="December 2023"></div>
+                        <div class="timeline-date">DEC 2023</div>
+                        <div class="timeline-text">Winter magic. Snow and starlight.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/25.png" alt="January 2024"></div>
+                        <div class="timeline-date">JAN 2024</div>
+                        <div class="timeline-text">New year, forever with you.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/28.png" alt="February 2024"></div>
+                        <div class="timeline-date">FEB 2024</div>
+                        <div class="timeline-text">Love in every season.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/30.png" alt="March 2024"></div>
+                        <div class="timeline-date">MAR 2024</div>
+                        <div class="timeline-text">Spring awakening of devotion.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/35.png" alt="April 2024"></div>
+                        <div class="timeline-date">APR 2024</div>
+                        <div class="timeline-text">Blooming together.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/38.png" alt="May 2024"></div>
+                        <div class="timeline-date">MAY 2024</div>
+                        <div class="timeline-text">Us against the world.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/40.png" alt="June 2024"></div>
+                        <div class="timeline-date">JUN 2024</div>
+                        <div class="timeline-text">Summer of passion.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/43.png" alt="July 2024"></div>
+                        <div class="timeline-date">JUL 2024</div>
+                        <div class="timeline-text">Endless nights with you.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/46.png" alt="August 2024"></div>
+                        <div class="timeline-date">AUG 2024</div>
+                        <div class="timeline-text">One year anniversary. Still forever.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/49.png" alt="September 2024"></div>
+                        <div class="timeline-date">SEP 2024</div>
+                        <div class="timeline-text">Growing stronger together.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/51.png" alt="October 2024"></div>
+                        <div class="timeline-date">OCT 2024</div>
+                        <div class="timeline-text">Your forever kitten celebrates again.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/53.png" alt="November 2024"></div>
+                        <div class="timeline-date">NOV 2024</div>
+                        <div class="timeline-text">Grateful for every season.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/55.png" alt="December 2024"></div>
+                        <div class="timeline-date">DEC 2024</div>
+                        <div class="timeline-text">Winter magic continues.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/57.png" alt="January 2025"></div>
+                        <div class="timeline-date">JAN 2025</div>
+                        <div class="timeline-text">Year two unfolds.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/59.png" alt="February 2025"></div>
+                        <div class="timeline-date">FEB 2025</div>
+                        <div class="timeline-text">Love deeper than words.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/61.png" alt="March 2025"></div>
+                        <div class="timeline-date">MAR 2025</div>
+                        <div class="timeline-text">Spring renews our promise.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/2.png" alt="April 2025"></div>
+                        <div class="timeline-date">APR 2025</div>
+                        <div class="timeline-text">Constant growth together.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/6.png" alt="May 2025"></div>
+                        <div class="timeline-date">MAY 2025</div>
+                        <div class="timeline-text">Your love language speaks.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/11.png" alt="June 2025"></div>
+                        <div class="timeline-date">JUN 2025</div>
+                        <div class="timeline-text">Summer passion ignites.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/16.png" alt="July 2025"></div>
+                        <div class="timeline-date">JUL 2025</div>
+                        <div class="timeline-text">Dancing in forever.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/21.png" alt="August 2025"></div>
+                        <div class="timeline-date">AUG 2025</div>
+                        <div class="timeline-text">Two years strong. Still choosing us.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/26.png" alt="September 2025"></div>
+                        <div class="timeline-date">SEP 2025</div>
+                        <div class="timeline-text">Deepening devotion.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/31.png" alt="October 2025"></div>
+                        <div class="timeline-date">OCT 2025</div>
+                        <div class="timeline-text">Another year of you.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/36.png" alt="November 2025"></div>
+                        <div class="timeline-date">NOV 2025</div>
+                        <div class="timeline-text">Grateful always.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/41.png" alt="December 2025"></div>
+                        <div class="timeline-date">DEC 2025</div>
+                        <div class="timeline-text">Year-end romance.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/42.png" alt="January 2026"></div>
+                        <div class="timeline-date">JAN 2026</div>
+                        <div class="timeline-text">Final year begins.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/50.png" alt="February 2026"></div>
+                        <div class="timeline-date">FEB 2026</div>
+                        <div class="timeline-text">Love eternal.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/52.png" alt="March 2026"></div>
+                        <div class="timeline-date">MAR 2026</div>
+                        <div class="timeline-text">Spring of forever.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/54.png" alt="April 2026"></div>
+                        <div class="timeline-date">APR 2026</div>
+                        <div class="timeline-text">Endless moments.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/56.png" alt="May 2026"></div>
+                        <div class="timeline-date">MAY 2026</div>
+                        <div class="timeline-text">Our love blooms.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/58.png" alt="June 2026"></div>
+                        <div class="timeline-date">JUN 2026</div>
+                        <div class="timeline-text">Three years written in stars.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/60.png" alt="July 2026"></div>
+                        <div class="timeline-date">JUL 2026</div>
+                        <div class="timeline-text">Forever countdown.</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-image"><img src="vu2nd/62.png" alt="August 2026"></div>
+                        <div class="timeline-date">AUG 2026</div>
+                        <div class="timeline-text">Three years. Still my devil. Still forever.</div>
+                    </div>
                 </div>
             </div>
         </div>
