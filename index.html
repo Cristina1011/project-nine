@@ -417,6 +417,64 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Rose Decorations */
+        .rose-divider {
+            text-align: center;
+            font-size: 2rem;
+            color: #c41e3a;
+            margin: 40px 0;
+            opacity: 0.7;
+            letter-spacing: 10px;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        .section::before {
+            content: '🌹';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            opacity: 0.4;
+        }
+
+        .section::after {
+            content: '🌹';
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 1.3rem;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Hearts Accent */
+        .heart-accent {
+            display: inline;
+            color: #c41e3a;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* Rose Background Pattern */
+        .rose-pattern {
+            position: relative;
+        }
+
+        .rose-pattern::before {
+            content: '🌹 💜 ❤️ 🌹 💜 ❤️';
+            position: absolute;
+            width: 100%;
+            opacity: 0.05;
+            font-size: 1.5rem;
+            word-wrap: break-word;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -431,8 +489,11 @@
         </div>
     </section>
 
+    <!-- Rose Divider -->
+    <div class="rose-divider">🌹 💜 ❤️ 🌹</div>
+
     <!-- Poem Section with Image -->
-    <section class="section poem-section">
+    <section class="section poem-section rose-pattern">
         <div class="poem-container">
             <div class="poem-image">
                 <img src="poem-image.jpg" alt="Three Years of Us" onerror="this.style.display='none'">
@@ -485,8 +546,11 @@
         </div>
     </section>
 
+    <!-- Rose Divider -->
+    <div class="rose-divider">💜 ❤️ 🌹 💜 ❤️</div>
+
     <!-- Lyrics Section -->
-    <section class="section lyrics-section">
+    <section class="section lyrics-section rose-pattern">
         <div class="lyrics-container">
             <h2>Our Love Story</h2>
             <div class="lyrics-text reveal">
@@ -554,8 +618,11 @@
         </div>
     </section>
 
+    <!-- Rose Divider -->
+    <div class="rose-divider">❤️ 🌹 💜 ❤️ 🌹</div>
+
     <!-- Gallery Section -->
-    <section class="section gallery-section">
+    <section class="section gallery-section rose-pattern">
         <div style="width: 100%;">
             <h2>Our Moments</h2>
             <div class="gallery-container" id="gallery">
@@ -564,8 +631,11 @@
         </div>
     </section>
 
+    <!-- Rose Divider -->
+    <div class="rose-divider">🌹 💜 ❤️ 🌹</div>
+
     <!-- Videos Section -->
-    <section class="section video-section">
+    <section class="section video-section rose-pattern">
         <div style="width: 100%;">
             <h2>Special Moments</h2>
             <div class="videos-container">
@@ -585,8 +655,11 @@
         </div>
     </section>
 
+    <!-- Rose Divider -->
+    <div class="rose-divider">💜 ❤️ 🌹 💜 ❤️ 🌹</div>
+
     <!-- Closing Section -->
-    <section class="section closing-section">
+    <section class="section closing-section rose-pattern">
         <div>
             <h2>Forever and Always</h2>
             <p class="closing-text">Mr. V, my devil—<br>
