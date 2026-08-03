@@ -1368,26 +1368,26 @@
     </div>
 
     <script>
-        // Image numbers - sequential 1-60
-        const imageNumbers = Array.from({length: 60}, (_, i) => i + 1);
+        // Image numbers - sequential 1-57 (removed 3 mismatched images)
+        const imageNumbers = Array.from({length: 57}, (_, i) => i + 1);
 
-        // Gallery Generation with Card Titles (60 completely unique - zero word repetition)
+        // Gallery Generation with Card Titles (57 unique - removed mismatched images)
         const galleryTitles = [
             'FIRST MEETING', 'LOVE AT SIGHT', 'STOLEN GLANCES', 'WHEN LOOKED',
             'BUTTERFLIES CHAOS', 'CHOSE ME', 'JUST TWO', 'UNDER STARS',
             'EYES GAZING', 'WHISPERS SILENCE', 'SECRETS SHARED', 'GENTLE TOUCH',
             'QUIET MOMENTS', 'SMILING BRIGHTLY', 'HELD CLOSE', 'PEACEFUL ARMS',
             'TENDER EMBRACE', 'HEARTS INTERTWINED', 'UNDERSTANDING SOUL', 'SANCTUARY FOUND',
-            'WHERE BEGAN', 'DEVOTION PURE', 'ANGELS DEMONS', 'MEANT TOGETHER',
-            'SOULMATE BOND', 'FOUND FOREVER', 'CONNECTED SPIRITS', 'SACRED SPACE',
-            'GOING INFINITELY', 'UNCONDITIONAL TRUST', 'ESSENCE ALIGNED', 'UNIVERSE WITHIN',
-            'ANCHOR STRONG', 'PASSION IGNITED', 'AUTHENTICITY SHINES', 'HAVEN SAFE',
-            'VOWS ETERNAL', 'KITTEN MINE', 'DEVIL\'S ANGEL', 'TIMELESS INSTANT',
-            'FIERCE FIRE', 'AUGUST NIGHTS', 'THREE YEARS', 'STILL CHOOSING',
-            'POOLSIDE PARADISE', 'JOURNEY WAITS', 'NEON GLOW', 'RHYTHM BEATS',
-            'MOONLIT TATTOOED', 'SPIRIT BONDED', 'TROPICAL ESCAPE', 'BEACH KISS',
-            'ROSES PETALS', 'RED WINE', 'DESIRE FLAME', 'BURNING INSIDE',
-            'COMPLETELY YOURS', 'MOVING WAVES', 'ELECTRIC BLOOMS', 'ANNIVERSARY MAGIC'
+            'WHERE BEGAN', 'DEVOTION PURE', 'MEANT TOGETHER', 'SOULMATE BOND',
+            'FOUND FOREVER', 'CONNECTED SPIRITS', 'SACRED SPACE', 'GOING INFINITELY',
+            'UNCONDITIONAL TRUST', 'ESSENCE ALIGNED', 'UNIVERSE WITHIN', 'ANCHOR STRONG',
+            'PASSION IGNITED', 'AUTHENTICITY SHINES', 'HAVEN SAFE', 'VOWS ETERNAL',
+            'KITTEN MINE', 'DEVIL\'S ANGEL', 'TIMELESS INSTANT', 'AUGUST NIGHTS',
+            'THREE YEARS', 'STILL CHOOSING', 'POOLSIDE PARADISE', 'JOURNEY WAITS',
+            'NEON GLOW', 'RHYTHM BEATS', 'MOONLIT TATTOOED', 'SPIRIT BONDED',
+            'TROPICAL ESCAPE', 'ROSES PETALS', 'RED WINE', 'DESIRE FLAME',
+            'BURNING INSIDE', 'COMPLETELY YOURS', 'MOVING WAVES', 'ELECTRIC BLOOMS',
+            'ANNIVERSARY MAGIC'
         ];
 
         let currentPhotoIndex = 0;
