@@ -1366,6 +1366,9 @@
     </div>
 
     <script>
+        // Actual image file numbers (gaps at 27, 44, 45, 47, 48)
+        const imageNumbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,46,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65];
+
         // Gallery Generation with Card Titles (60 unique titles)
         const galleryTitles = [
             'FIRST MEETING', 'LOVE AT FIRST SIGHT', 'STOLEN GLANCES', 'WHEN YOU LOOKED AT ME',
@@ -1379,35 +1382,35 @@
             'MY CONSTANT', 'YOUR LOVE LANGUAGE', 'REAL WITH YOU', 'VULNERABLE & SAFE',
             'PROMISES KEPT', 'FOREVER YOUR KITTEN', 'YOUR DEVIL\'S ANGEL', 'ETERNITY WAITS',
             'PASSION & TENDERNESS', 'AUGUST FOREVER', 'THREE YEARS STRONG', 'STILL CHOOSING YOU',
-            'ALWAYS MINE', 'MY EVERYTHING', 'TIMELESS DEVOTION', 'LOVE MADE US', 'TOGETHER FOREVER', 'OUR STORY', 'FOREVER & ALWAYS',
-            'NEON NIGHTS WITH YOU', 'BEATS & LOVE', 'TOGETHER IN RED', 'YOU & ME ALWAYS',
-            'SOUL TO SOUL', 'BY THE POOL OF DREAMS', 'MOONLIGHT KISS', 'FORMAL & FOREVER',
-            'ROSE & ROMANCE', 'EIFFEL TOWER LOVE', 'HEARTS COLLIDE', 'BEAUTIFUL FOREVER'
+            'TOGETHER FOREVER', 'OUR STORY', 'NEON NIGHTS WITH YOU', 'BEATS & LOVE',
+            'YOU & ME ALWAYS', 'SOUL TO SOUL', 'BY THE POOL OF DREAMS', 'MOONLIGHT KISS',
+            'ROSE & ROMANCE', 'PASSION IN RED', 'DARK DESIRES', 'PASSIONATE ALWAYS',
+            'YOURS FOREVER', 'DANCING THROUGH LIFE', 'DARK ROMANCE BLOOMS', 'ANNIVERSARY PERFECTION'
         ];
 
-        let currentPhotoIndex = 1;
-        const totalPhotos = 60;
+        let currentPhotoIndex = 0;
+        const totalPhotos = imageNumbers.length;
 
         function initGallery() {
             const galleryGrid = document.getElementById('galleryGrid');
-            for (let i = 1; i <= totalPhotos; i++) {
+            imageNumbers.forEach((num, index) => {
                 const card = document.createElement('div');
                 card.className = 'gallery-card';
-                const title = galleryTitles[(i - 1) % galleryTitles.length];
+                const title = galleryTitles[index % galleryTitles.length];
                 card.innerHTML = `
-                    <img src="vu2nd/${i}.png" alt="Moment ${i}" onclick="openCarousel(${i})" loading="lazy">
+                    <img src="vu2nd/${num}.png" alt="Moment ${num}" onclick="openCarousel(${index})" loading="lazy">
                     <div class="gallery-card-title">
                         <h3>${title}</h3>
                         <div class="gallery-card-divider"></div>
                     </div>
                 `;
                 galleryGrid.appendChild(card);
-            }
+            });
             document.getElementById('total').textContent = totalPhotos;
         }
 
-        function openCarousel(photoNumber) {
-            currentPhotoIndex = photoNumber;
+        function openCarousel(index) {
+            currentPhotoIndex = index;
             updateCarousel();
             document.getElementById('carouselModal').classList.add('active');
         }
@@ -1417,17 +1420,18 @@
         }
 
         function updateCarousel() {
-            document.getElementById('carouselImage').src = `vu2nd/${currentPhotoIndex}.png`;
-            document.getElementById('current').textContent = currentPhotoIndex;
+            const imageNum = imageNumbers[currentPhotoIndex];
+            document.getElementById('carouselImage').src = `vu2nd/${imageNum}.png`;
+            document.getElementById('current').textContent = currentPhotoIndex + 1;
         }
 
         function nextSlide() {
-            currentPhotoIndex = currentPhotoIndex === totalPhotos ? 1 : currentPhotoIndex + 1;
+            currentPhotoIndex = (currentPhotoIndex + 1) % totalPhotos;
             updateCarousel();
         }
 
         function prevSlide() {
-            currentPhotoIndex = currentPhotoIndex === 1 ? totalPhotos : currentPhotoIndex - 1;
+            currentPhotoIndex = currentPhotoIndex === 0 ? totalPhotos - 1 : currentPhotoIndex - 1;
             updateCarousel();
         }
 
