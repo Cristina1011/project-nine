@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three Years of Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 100%);
+            color: #e8d4c4;
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        /* Dark theme with red & black */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #c41e3a;
+            border-radius: 4px;
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Welcome Section */
+        .welcome {
+            text-align: center;
+            animation-delay: 0.2s;
+        }
+
+        .welcome h1 {
+            font-size: 4rem;
+            color: #c41e3a;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+            letter-spacing: 2px;
+        }
+
+        .welcome .subtitle {
+            font-size: 1.5rem;
+            color: #d4a574;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .welcome p {
+            font-size: 1.2rem;
+            color: #b0a8a0;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .scroll-hint {
+            font-size: 0.9rem;
+            color: #c41e3a;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* Poem Section */
+        .poem-section {
+            animation-delay: 0.4s;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .poem-section h2 {
+            font-size: 2.5rem;
+            color: #c41e3a;
+            margin-bottom: 40px;
+            text-align: center;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        .poem-text {
+            background: rgba(20, 10, 20, 0.6);
+            border-left: 4px solid #c41e3a;
+            padding: 40px;
+            font-size: 1.1rem;
+            line-height: 2;
+            color: #d4a574;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+        }
+
+        .poem-text p {
+            margin-bottom: 20px;
+        }
+
+        .poem-text .italic {
+            font-style: italic;
+            color: #c41e3a;
+        }
+
+        .audio-player {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(196, 30, 58, 0.1);
+            border-radius: 8px;
+            border: 2px solid #c41e3a;
+        }
+
+        .audio-player p {
+            color: #d4a574;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        audio {
+            width: 100%;
+            max-width: 500px;
+            background: #1a1a2e;
+            border-radius: 8px;
+        }
+
+        /* Lyrics Section */
+        .lyrics-section {
+            animation-delay: 0.6s;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .lyrics-section h2 {
+            font-size: 2.5rem;
+            color: #c41e3a;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .lyrics-text {
+            background: rgba(20, 10, 20, 0.6);
+            border-left: 4px solid #d4a574;
+            padding: 40px;
+            font-size: 1rem;
+            line-height: 2;
+            color: #b0a8a0;
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+        }
+
+        .lyrics-text p {
+            margin-bottom: 15px;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            animation-delay: 0.8s;
+            width: 100%;
+        }
+
+        .gallery-section h2 {
+            font-size: 2.5rem;
+            color: #c41e3a;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            aspect-ratio: 3/4;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(196, 30, 58, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Video Section */
+        .video-section {
+            animation-delay: 1s;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .video-section h2 {
+            font-size: 2.5rem;
+            color: #c41e3a;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 2px solid #c41e3a;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Closing Section */
+        .closing-section {
+            animation-delay: 1.2s;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .closing-section h2 {
+            font-size: 2.5rem;
+            color: #c41e3a;
+            margin-bottom: 30px;
+        }
+
+        .closing-text {
+            font-size: 1.3rem;
+            color: #d4a574;
+            line-height: 2;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .emoji {
+            font-size: 3rem;
+            margin: 20px 0;
+        }
+
+        /* Music Player */
+        .music-info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(196, 30, 58, 0.2);
+            border: 2px solid #c41e3a;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #d4a574;
+            backdrop-filter: blur(10px);
+            max-width: 250px;
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .welcome h1 {
+                font-size: 2.5rem;
+            }
+
+            .poem-section h2,
+            .lyrics-section h2,
+            .gallery-section h2,
+            .video-section h2,
+            .closing-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .poem-text,
+            .lyrics-text {
+                padding: 20px;
+                font-size: 1rem;
+            }
+
+            .gallery-container {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .music-info {
+                bottom: 10px;
+                right: 10px;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Welcome Section -->
+    <section class="section welcome">
+        <div>
+            <h1>💜 Three Years of Us 🖤</h1>
+            <p class="subtitle">August 2023 - August 2026</p>
+            <p>A love story written in moments, built on actions, and lived every single day.</p>
+            <p class="scroll-hint">↓ Scroll to continue ↓</p>
+        </div>
+    </section>
+
+    <!-- Poem Section (Your Voice) -->
+    <section class="section poem-section">
+        <div>
+            <h2>Three Years of You</h2>
+            <div class="poem-text">
+                <p>Mr. V, my devil—I want to tell you something.<br>
+                Today marks three years since you became my constant,<br>
+                And I need you to know what that means.</p>
+
+                <p>You've never been the type to speak your feelings out loud.<br>
+                Instead, you <em>show</em> me.<br>
+                You show me through the way you remember the small things,<br>
+                Through the effort you put in when it would be easier to fade away.</p>
+
+                <p>August brought you into my life like a spark I didn't know I needed.<br>
+                But it wasn't the romance of new beginnings that captured me—<br>
+                It was how <em>real</em> you stayed when everything could have been fake.</p>
+
+                <p>You've been the one who actually <em>does</em> the work,<br>
+                Who doesn't just promise but <em>proves</em> it day after day.<br>
+                On my birthday, it wasn't flowers or words—it was your presence,<br>
+                Your dedication to making me feel like I matter.</p>
+
+                <p>When winter wrapped around us, you didn't retreat.<br>
+                You built moments for <em>us</em>—Creating a world for us where I felt safe, seen, and completely yours.</p>
+
+                <p>But what I'm most grateful for is how you've been there in the quiet moments,<br>
+                When I've been broken and couldn't hide it,<br>
+                You stayed. You held me. You didn't need words to fix me—<br>
+                Your presence alone was the healing.</p>
+
+                <p>Three years, and you keep choosing.<br>
+                Not the best version of me, but all of me.<br>
+                The messy, scared, complicated me.</p>
+
+                <p class="italic">Forever your Angel, Forever your kitten.<br>
+                💜❤️</p>
+            </div>
+
+            <div class="audio-player">
+                <p>🎙️ Listen to Cristina's voice reading this poem...</p>
+                <audio controls>
+                    <source src="poem-voice.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lyrics Section -->
+    <section class="section lyrics-section">
+        <div>
+            <h2>Our Love Story</h2>
+            <div class="lyrics-text">
+                <p>It started with a look under neon skies!<br>
+                August breeze, but you lit the fire inside<br>
+                Your voice, like a whisper that found my soul<br>
+                From the night star, my heart had no control</p>
+
+                <p>I waited for your text like the stars wait for dawn<br>
+                You obsessed high and suddenly the world was gone<br>
+                You took my hand in a dark quiet room and made it feel like love bloomed too soon</p>
+
+                <p class="italic">Mi enamore de ti<br>
+                Sin buscar sin razón<br>
+                Like a song I knew<br>
+                But had never sung before</p>
+
+                <p>Your arms became my home<br>
+                Your kiss my peace<br>
+                Every heartbeat says you're all I need</p>
+
+                <p>Even when the night falls cold and still<br>
+                Forever my devil<br>
+                Always your angel I will</p>
+
+                <p>October wrapped in a dream so sweet<br>
+                You made my birthday feel like a heartbeat speed<br>
+                Tiramisu smiles, your love in the air<br>
+                And a plushie you gave like you were always there</p>
+
+                <p>Then Christmas came with Northern Lights<br>
+                You built our home in the hush of night<br>
+                Snowflakes danced and I knew right then<br>
+                That I'll love you again and again</p>
+
+                <p>Me enamore de ti when the sky turned gold<br>
+                Even when silence tried to take hold<br>
+                Through seasons we bloom, through distance we stay<br>
+                In a beach you built where sunsets play</p>
+
+                <p>I gave you my soul, my heart stood still<br>
+                Forever your kitten, always my devil I will</p>
+
+                <p>Even when shadows came to stay<br>
+                You held me close, never looked away<br>
+                You wiped my tears, stayed up through the cries<br>
+                Said I'm here and I felt alive</p>
+
+                <p>Love like ours, it never fades<br>
+                It just waits in quiet waves</p>
+
+                <p class="italic">Mi Enamore de ti<br>
+                In every rise and fall<br>
+                Through every season you've been my all<br>
+                The storms may try to dim our flame<br>
+                It still burns with your name</p>
+
+                <p>So take my hand, let's ride the thrill<br>
+                Forever my devil, always your kitten I will</p>
+
+                <p class="italic">Siempre tuyo, siempre mio<br>
+                Tu angel, tu abrigo<br>
+                Forever and always I will</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery-section">
+        <div style="width: 100%;">
+            <h2>Our Moments</h2>
+            <div class="gallery-container" id="gallery">
+                <!-- Gallery items will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="section video-section">
+        <div>
+            <h2>A Special Moment</h2>
+            <div class="video-container">
+                <video controls>
+                    <source src="anniversary-video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- Closing Section -->
+    <section class="section closing-section">
+        <div>
+            <h2>Forever and Always</h2>
+            <p class="closing-text">Mr. V, my devil—<br>
+            Thank you for three years of being real, being present, and being mine.<br>
+            Here's to forever choosing us.</p>
+            <div class="emoji">💜❤️</div>
+            <p class="closing-text italic">Always your angel<br>
+            Always your kitten<br>
+            Forever your love</p>
+        </div>
+    </section>
+
+    <!-- Music Info -->
+    <div class="music-info">
+        <p>🎵 Music playing throughout your journey...</p>
+    </div>
+
+    <script>
+        // Load gallery images
+        const galleryContainer = document.getElementById('gallery');
+        for (let i = 1; i <= 51; i++) {
+            const img = document.createElement('div');
+            img.className = 'gallery-item';
+            img.innerHTML = `<img src="vu2nd/${i}.png" alt="Memory ${i}" loading="lazy">`;
+            galleryContainer.appendChild(img);
+        }
+
+        // Smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Music playlist (will be integrated with YouTube audio)
+        const playlist = [
+            'https://youtu.be/_MVWrTgoJIk',
+            'https://youtu.be/CGj8uWROTFo',
+            'https://youtu.be/iZ9dkLr5Kv0',
+            'https://youtu.be/9nPMihiD1Rw',
+            'https://youtu.be/syFZfO_wfMQ',
+            'https://youtu.be/29RTLrPDJzc',
+            'https://youtu.be/kV6cXrevo8s',
+            'https://youtu.be/Vnrbdn7NLvM'
+        ];
+
+        console.log('Anniversary website loaded. Music to be integrated.');
+    </script>
+
+</body>
+</html>
