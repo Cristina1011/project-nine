@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #0d0308 0%, #1a0a1f 50%, #0f0510 100%);
+            background: linear-gradient(135deg, #12050d 0%, #1f0f2a 50%, #140810 100%);
             color: #e8d4c4;
             overflow-x: hidden;
             line-height: 1.8;
@@ -28,8 +28,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(196, 30, 58, 0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(75, 0, 130, 0.05) 0%, transparent 50%);
+            background: radial-gradient(circle at 20% 50%, rgba(196, 30, 58, 0.12) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(120, 40, 150, 0.1) 0%, transparent 50%);
             pointer-events: none;
             z-index: -1;
         }
@@ -103,8 +103,8 @@
         }
 
         @keyframes glow {
-            0%, 100% { text-shadow: 0 0 10px rgba(196, 30, 58, 0.5), 0 0 20px rgba(196, 30, 58, 0.2); }
-            50% { text-shadow: 0 0 20px rgba(196, 30, 58, 0.8), 0 0 40px rgba(196, 30, 58, 0.4); }
+            0%, 100% { text-shadow: 0 0 15px rgba(196, 30, 58, 0.7), 0 0 30px rgba(196, 30, 58, 0.3); }
+            50% { text-shadow: 0 0 25px rgba(196, 30, 58, 1), 0 0 50px rgba(196, 30, 58, 0.5); }
         }
 
         @keyframes floatRose {
@@ -224,7 +224,7 @@
             border-radius: 15px;
             z-index: 3;
             pointer-events: none;
-            box-shadow: 0 0 30px rgba(196, 30, 58, 0.3), inset 0 0 30px rgba(196, 30, 58, 0.1);
+            box-shadow: 0 0 40px rgba(196, 30, 58, 0.4), 0 0 60px rgba(196, 30, 58, 0.2), inset 0 0 40px rgba(196, 30, 58, 0.15);
         }
 
         .poem-image img {
@@ -246,23 +246,24 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 30px;
-            text-shadow: 0 0 20px rgba(196, 30, 58, 0.2);
+            filter: drop-shadow(0 0 15px rgba(196, 30, 58, 0.4)) drop-shadow(0 0 30px rgba(196, 30, 58, 0.2));
             letter-spacing: 1px;
+            font-weight: bold;
         }
 
         .poem-text {
-            background: linear-gradient(135deg, rgba(20, 10, 20, 0.8) 0%, rgba(30, 10, 30, 0.8) 100%);
+            background: linear-gradient(135deg, rgba(20, 10, 20, 0.85) 0%, rgba(30, 10, 30, 0.85) 100%);
             border-left: 3px solid;
             border-image: linear-gradient(180deg, #c41e3a 0%, #6b1628 100%) 1;
             padding: 35px;
             font-size: clamp(0.95rem, 2vw, 1.1rem);
             line-height: 2;
             color: #d4a574;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             border-radius: 10px;
             max-height: 550px;
             overflow-y: auto;
-            box-shadow: 0 0 30px rgba(196, 30, 58, 0.15), inset 0 0 20px rgba(196, 30, 58, 0.05);
+            box-shadow: 0 0 40px rgba(196, 30, 58, 0.25), inset 0 0 30px rgba(196, 30, 58, 0.08), 0 0 60px rgba(196, 30, 58, 0.1);
             position: relative;
         }
 
@@ -290,11 +291,11 @@
         .audio-player {
             margin-top: 30px;
             padding: 25px;
-            background: linear-gradient(135deg, rgba(196, 30, 58, 0.15) 0%, rgba(75, 0, 130, 0.1) 100%);
+            background: linear-gradient(135deg, rgba(196, 30, 58, 0.2) 0%, rgba(75, 0, 130, 0.15) 100%);
             border-radius: 10px;
             border: 2px solid #c41e3a;
             text-align: center;
-            box-shadow: 0 0 20px rgba(196, 30, 58, 0.2);
+            box-shadow: 0 0 30px rgba(196, 30, 58, 0.3), 0 0 50px rgba(196, 30, 58, 0.15);
         }
 
         .audio-player p {
@@ -333,18 +334,18 @@
         }
 
         .lyrics-text {
-            background: linear-gradient(135deg, rgba(20, 10, 20, 0.8) 0%, rgba(30, 10, 30, 0.8) 100%);
+            background: linear-gradient(135deg, rgba(20, 10, 20, 0.85) 0%, rgba(30, 10, 30, 0.85) 100%);
             border-left: 3px solid;
             border-image: linear-gradient(180deg, #d4a574 0%, #a0885a 100%) 1;
             padding: 35px;
             font-size: clamp(0.95rem, 2vw, 1.05rem);
             line-height: 2;
             color: #b0a8a0;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             border-radius: 10px;
             max-height: 650px;
             overflow-y: auto;
-            box-shadow: 0 0 30px rgba(196, 30, 58, 0.1), inset 0 0 20px rgba(196, 30, 58, 0.03);
+            box-shadow: 0 0 35px rgba(196, 30, 58, 0.15), 0 0 50px rgba(196, 30, 58, 0.08), inset 0 0 20px rgba(196, 30, 58, 0.05);
         }
 
         .lyrics-text p {
@@ -393,7 +394,7 @@
         .gallery-item:hover {
             transform: scale(1.08);
             border-color: #c41e3a;
-            box-shadow: 0 0 30px rgba(196, 30, 58, 0.5), inset 0 0 30px rgba(196, 30, 58, 0.1);
+            box-shadow: 0 0 40px rgba(196, 30, 58, 0.6), 0 0 60px rgba(196, 30, 58, 0.3), inset 0 0 30px rgba(196, 30, 58, 0.15);
         }
 
         .gallery-item img {
@@ -448,7 +449,7 @@
         }
 
         .video-wrapper:hover {
-            box-shadow: 0 0 40px rgba(196, 30, 58, 0.4), inset 0 0 20px rgba(196, 30, 58, 0.1);
+            box-shadow: 0 0 50px rgba(196, 30, 58, 0.5), 0 0 70px rgba(196, 30, 58, 0.2), inset 0 0 30px rgba(196, 30, 58, 0.15);
             border-color: #c41e3a;
         }
 
