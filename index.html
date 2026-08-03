@@ -448,47 +448,90 @@
         .timeline {
             max-width: 900px;
             margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #d4af37, rgba(212, 175, 55, 0.2));
+            animation: lineGrow 1.2s ease forwards;
+        }
+
+        @keyframes lineGrow {
+            from { height: 0; }
+            to { height: 100%; }
         }
 
         .timeline-item {
             display: flex;
             gap: 40px;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
+            position: relative;
             opacity: 0;
-            animation: slideUp 0.8s ease forwards;
+            animation: slideInLeft 0.8s ease forwards;
         }
 
         .timeline-item:nth-child(1) { animation-delay: 0.1s; }
-        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
-        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
-        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.5s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.7s; }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .timeline-dot {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             background: #d4af37;
             border-radius: 50%;
-            margin-top: 10px;
+            margin-top: 5px;
             flex-shrink: 0;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.3); }
+            50% { box-shadow: 0 0 50px rgba(212, 175, 55, 0.9), inset 0 0 15px rgba(255, 255, 255, 0.5); }
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 20px;
+            background: rgba(212, 175, 55, 0.08);
+            border-left: 2px solid #d4af37;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+        }
+
+        .timeline-item:hover .timeline-content {
+            background: rgba(212, 175, 55, 0.15);
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
         }
 
         .timeline-date {
             color: #d4af37;
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            font-weight: 500;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
         }
 
         .timeline-text {
-            color: #b0a8a0;
+            color: #e8d4c4;
             line-height: 1.8;
+            font-size: 0.95rem;
         }
 
         /* Music Player */
@@ -710,28 +753,28 @@
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
-                <div>
+                <div class="timeline-content">
                     <div class="timeline-date">AUGUST 2023</div>
                     <div class="timeline-text">You entered my life like destiny. IMVU was just a place, but you were different.</div>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
-                <div>
+                <div class="timeline-content">
                     <div class="timeline-date">OCTOBER 2024</div>
                     <div class="timeline-text">My birthday. You made it unforgettable. Tiramisu, your love, and a plushie that holds memories.</div>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
-                <div>
+                <div class="timeline-content">
                     <div class="timeline-date">DECEMBER 2024</div>
                     <div class="timeline-text">Winter built us a world. Northern Lights, snow, and the home you created for us.</div>
                 </div>
             </div>
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
-                <div>
+                <div class="timeline-content">
                     <div class="timeline-date">AUGUST 2026</div>
                     <div class="timeline-text">Three years later. Still choosing us. Still my devil. Still forever.</div>
                 </div>
