@@ -28,8 +28,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(196, 30, 58, 0.12) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(120, 40, 150, 0.1) 0%, transparent 50%);
+            background: radial-gradient(circle at 20% 50%, rgba(196, 30, 58, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(120, 40, 150, 0.04) 0%, transparent 50%);
             pointer-events: none;
             z-index: -1;
         }
@@ -103,8 +103,8 @@
         }
 
         @keyframes glow {
-            0%, 100% { text-shadow: 0 0 15px rgba(196, 30, 58, 0.7), 0 0 30px rgba(196, 30, 58, 0.3); }
-            50% { text-shadow: 0 0 25px rgba(196, 30, 58, 1), 0 0 50px rgba(196, 30, 58, 0.5); }
+            0%, 100% { text-shadow: 0 0 8px rgba(196, 30, 58, 0.3); }
+            50% { text-shadow: 0 0 12px rgba(196, 30, 58, 0.5); }
         }
 
         @keyframes floatRose {
@@ -138,7 +138,7 @@
             margin-bottom: 30px;
             font-style: italic;
             animation: slideInRight 1s ease-out 0.5s both;
-            text-shadow: 0 0 15px rgba(196, 30, 58, 0.3);
+            text-shadow: none;
         }
 
         .welcome p {
@@ -156,7 +156,7 @@
             color: #c41e3a;
             animation: pulse 2.5s ease-in-out infinite 1s;
             cursor: pointer;
-            text-shadow: 0 0 10px rgba(196, 30, 58, 0.5);
+            text-shadow: none;
         }
 
         @keyframes pulse {
@@ -170,10 +170,10 @@
             font-size: 1.8rem;
             color: #c41e3a;
             margin: 50px 0;
-            opacity: 0.6;
+            opacity: 0.5;
             letter-spacing: 15px;
             animation: fadeIn 1.5s ease-in;
-            text-shadow: 0 0 15px rgba(196, 30, 58, 0.4);
+            text-shadow: none;
         }
 
         .rose-divider span {
@@ -224,7 +224,7 @@
             border-radius: 15px;
             z-index: 3;
             pointer-events: none;
-            box-shadow: 0 0 40px rgba(196, 30, 58, 0.4), 0 0 60px rgba(196, 30, 58, 0.2), inset 0 0 40px rgba(196, 30, 58, 0.15);
+            box-shadow: 0 0 10px rgba(196, 30, 58, 0.1);
         }
 
         .poem-image img {
@@ -246,7 +246,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 30px;
-            filter: drop-shadow(0 0 15px rgba(196, 30, 58, 0.4)) drop-shadow(0 0 30px rgba(196, 30, 58, 0.2));
+            filter: drop-shadow(0 0 5px rgba(196, 30, 58, 0.2));
             letter-spacing: 1px;
             font-weight: bold;
         }
@@ -263,7 +263,7 @@
             border-radius: 10px;
             max-height: 550px;
             overflow-y: auto;
-            box-shadow: 0 0 40px rgba(196, 30, 58, 0.25), inset 0 0 30px rgba(196, 30, 58, 0.08), 0 0 60px rgba(196, 30, 58, 0.1);
+            box-shadow: 0 0 15px rgba(196, 30, 58, 0.1), inset 0 0 10px rgba(196, 30, 58, 0.03);
             position: relative;
         }
 
@@ -291,11 +291,11 @@
         .audio-player {
             margin-top: 30px;
             padding: 25px;
-            background: linear-gradient(135deg, rgba(196, 30, 58, 0.2) 0%, rgba(75, 0, 130, 0.15) 100%);
+            background: linear-gradient(135deg, rgba(196, 30, 58, 0.1) 0%, rgba(75, 0, 130, 0.08) 100%);
             border-radius: 10px;
-            border: 2px solid #c41e3a;
+            border: 2px solid rgba(196, 30, 58, 0.4);
             text-align: center;
-            box-shadow: 0 0 30px rgba(196, 30, 58, 0.3), 0 0 50px rgba(196, 30, 58, 0.15);
+            box-shadow: 0 0 8px rgba(196, 30, 58, 0.08);
         }
 
         .audio-player p {
@@ -345,7 +345,7 @@
             border-radius: 10px;
             max-height: 650px;
             overflow-y: auto;
-            box-shadow: 0 0 35px rgba(196, 30, 58, 0.15), 0 0 50px rgba(196, 30, 58, 0.08), inset 0 0 20px rgba(196, 30, 58, 0.05);
+            box-shadow: 0 0 12px rgba(196, 30, 58, 0.08);
         }
 
         .lyrics-text p {
@@ -394,7 +394,7 @@
         .gallery-item:hover {
             transform: scale(1.08);
             border-color: #c41e3a;
-            box-shadow: 0 0 40px rgba(196, 30, 58, 0.6), 0 0 60px rgba(196, 30, 58, 0.3), inset 0 0 30px rgba(196, 30, 58, 0.15);
+            box-shadow: 0 0 12px rgba(196, 30, 58, 0.2);
         }
 
         .gallery-item img {
@@ -449,7 +449,7 @@
         }
 
         .video-wrapper:hover {
-            box-shadow: 0 0 50px rgba(196, 30, 58, 0.5), 0 0 70px rgba(196, 30, 58, 0.2), inset 0 0 30px rgba(196, 30, 58, 0.15);
+            box-shadow: 0 0 12px rgba(196, 30, 58, 0.15);
             border-color: #c41e3a;
         }
 
@@ -486,7 +486,7 @@
             line-height: 1.9;
             margin-bottom: 20px;
             font-style: italic;
-            text-shadow: 0 0 10px rgba(196, 30, 58, 0.2);
+            text-shadow: none;
         }
 
         .emoji {
@@ -500,8 +500,8 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: linear-gradient(135deg, rgba(196, 30, 58, 0.25) 0%, rgba(75, 0, 130, 0.15) 100%);
-            border: 2px solid #c41e3a;
+            background: linear-gradient(135deg, rgba(196, 30, 58, 0.12) 0%, rgba(75, 0, 130, 0.08) 100%);
+            border: 2px solid rgba(196, 30, 58, 0.3);
             padding: 15px 20px;
             border-radius: 10px;
             font-size: 0.9rem;
@@ -510,7 +510,7 @@
             max-width: 260px;
             z-index: 10;
             animation: slideInRight 0.8s ease-out;
-            box-shadow: 0 0 20px rgba(196, 30, 58, 0.2);
+            box-shadow: 0 0 8px rgba(196, 30, 58, 0.08);
         }
 
         /* Scroll reveal */
