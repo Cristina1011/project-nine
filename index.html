@@ -18,6 +18,9 @@
             overflow-x: hidden;
             line-height: 1.8;
             scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
         }
 
         ::-webkit-scrollbar { width: 8px; }
@@ -449,7 +452,28 @@
             max-width: 100%;
             margin: 0 auto;
             overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
             padding: 40px 0;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(212, 175, 55, 0.4) transparent;
+        }
+
+        .timeline-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .timeline-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .timeline-container::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.4);
+            border-radius: 4px;
+        }
+
+        .timeline-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(212, 175, 55, 0.6);
         }
 
         .timeline {
@@ -458,6 +482,7 @@
             padding: 20px;
             min-width: min-content;
             position: relative;
+            will-change: transform;
         }
 
         .timeline::before {
@@ -685,36 +710,80 @@
             50% { transform: translateY(-20px); }
         }
 
-        /* Responsive */
+        /* Responsive - Laptop/Desktop */
+        @media (min-width: 1200px) {
+            nav { padding: 25px 60px; }
+            .hero { padding: 100px 60px; }
+            .gallery-section, .story-section, .videos-section, .timeline-section, .closing {
+                padding: 80px 60px;
+            }
+            .music-player-fixed { width: 300px; bottom: 30px; right: 30px; }
+            .timeline-container { padding: 40px 0; }
+        }
+
+        /* Responsive - Tablet */
+        @media (max-width: 1199px) and (min-width: 769px) {
+            nav { padding: 20px 40px; }
+            .hero { padding: 80px 40px; }
+            .gallery-section, .story-section, .videos-section, .timeline-section, .closing {
+                padding: 60px 40px;
+            }
+            .section-title { font-size: 2.2rem; }
+            .hero-content h1 { font-size: clamp(2.5rem, 6vw, 4rem); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+            .music-player-fixed { width: 280px; bottom: 25px; right: 25px; }
+            .timeline-item { min-width: 280px; width: 280px; }
+        }
+
+        /* Responsive - Mobile (iPhone, Android) */
         @media (max-width: 768px) {
+            * { scroll-behavior: smooth; }
+
             nav {
-                padding: 15px 30px;
+                padding: 15px 20px;
+                flex-wrap: wrap;
+            }
+
+            .logo {
+                font-size: 1.3rem;
             }
 
             nav ul {
-                gap: 20px;
+                gap: 12px;
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
             }
 
             nav a {
-                font-size: 0.8rem;
+                font-size: 0.75rem;
+                letter-spacing: 0.5px;
             }
 
             .hero {
-                padding: 80px 30px;
+                padding: 60px 20px;
                 text-align: center;
-            }
-
-            .hero-content {
-                max-width: 100%;
+                height: 85vh;
             }
 
             .hero-content h1 {
-                font-size: 2.5rem;
+                font-size: clamp(2rem, 5vw, 2.8rem);
+                line-height: 1.3;
+            }
+
+            .hero-tagline {
+                font-size: 1rem;
+                margin-bottom: 30px;
+            }
+
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 0.85rem;
             }
 
             .gallery-grid {
                 grid-template-columns: 1fr;
-                gap: 25px;
+                gap: 20px;
             }
 
             .gallery-section,
@@ -722,27 +791,153 @@
             .videos-section,
             .timeline-section,
             .closing {
-                padding: 50px 20px;
+                padding: 40px 20px;
             }
 
             .section-title {
-                font-size: 1.8rem;
-                margin-bottom: 40px;
+                font-size: 1.6rem;
+                margin-bottom: 30px;
             }
 
-            .carousel-nav.prev { left: -10px; }
-            .carousel-nav.next { right: -10px; }
-            .carousel-nav { width: 40px; height: 40px; font-size: 1.2rem; }
+            .story-text {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
 
-            .music-player-fixed {
-                bottom: 20px;
-                right: 20px;
-                width: 250px;
+            .audio-section {
+                padding: 30px 15px;
+            }
+
+            .timeline-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding: 20px 0;
+            }
+
+            .timeline {
+                gap: 15px;
+                padding: 15px;
             }
 
             .timeline-item {
-                flex-direction: column;
+                min-width: 260px;
+                width: 260px;
+            }
+
+            .timeline-image {
+                height: 150px;
+            }
+
+            .timeline-content {
+                padding: 15px;
+            }
+
+            .timeline-date {
+                font-size: 0.75rem;
+                margin-bottom: 8px;
+            }
+
+            .timeline-text {
+                font-size: 0.85rem;
+            }
+
+            .carousel-nav {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+
+            .carousel-nav.prev { left: 5px; }
+            .carousel-nav.next { right: 5px; }
+
+            .music-player-fixed {
+                bottom: 15px;
+                right: 15px;
+                width: 220px;
+                padding: 15px;
+            }
+
+            .player-title {
+                font-size: 0.75rem;
+                margin-bottom: 10px;
+            }
+
+            .player-controls {
+                gap: 8px;
+                margin-bottom: 10px;
+            }
+
+            .player-btn {
+                padding: 6px;
+                font-size: 0.75rem;
+            }
+
+            .visualizer {
+                height: 25px;
+                gap: 2px;
+            }
+
+            .bar {
+                width: 3px;
+            }
+
+            .closing h2 {
+                font-size: 1.5rem;
+            }
+
+            .closing p {
+                font-size: 0.95rem;
+            }
+
+            .closing-emoji {
+                font-size: 2rem;
+                margin: 20px 0;
+            }
+        }
+
+        /* Responsive - Small Mobile (iPhone SE, etc.) */
+        @media (max-width: 480px) {
+            nav {
+                padding: 12px 15px;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            nav a {
+                font-size: 0.7rem;
+            }
+
+            .hero {
+                padding: 40px 15px;
+                height: 80vh;
+            }
+
+            .hero-content h1 {
+                font-size: clamp(1.6rem, 4vw, 2.2rem);
+            }
+
+            .section-title {
+                font-size: 1.4rem;
+            }
+
+            .gallery-grid {
                 gap: 15px;
+            }
+
+            .timeline-item {
+                min-width: 240px;
+                width: 240px;
+            }
+
+            .timeline-image {
+                height: 130px;
+            }
+
+            .music-player-fixed {
+                width: 190px;
+                padding: 12px;
             }
         }
 
