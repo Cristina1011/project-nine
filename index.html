@@ -456,6 +456,27 @@
             border-radius: 4px;
         }
 
+        /* Section visibility */
+        .gallery-section, .story-section, .timeline-section, .closing-section {
+            display: none;
+        }
+
+        .content-wrapper.show-gallery .gallery-section {
+            display: block;
+        }
+
+        .content-wrapper.show-story .story-section {
+            display: block;
+        }
+
+        .content-wrapper.show-timeline .timeline-section {
+            display: block;
+        }
+
+        .content-wrapper.show-closing .closing-section {
+            display: block;
+        }
+
         /* Gallery Section */
         .gallery-section {
             min-height: 100vh;
@@ -551,12 +572,22 @@
 
         .gallery-card:hover {
             border-color: #ffd700;
-            transform: translateY(-30px) rotateX(20deg) rotateZ(3deg) rotateY(5deg) scale(1.08);
+            transform: translateY(-40px) rotateX(25deg) rotateZ(5deg) rotateY(8deg) scale(1.12);
             box-shadow:
-                0 70px 140px rgba(212, 175, 55, 0.5),
-                inset 0 0 40px rgba(212, 175, 55, 0.15),
-                0 0 50px rgba(212, 175, 55, 0.3);
-            filter: brightness(1.15);
+                0 80px 160px rgba(212, 175, 55, 0.6),
+                inset 0 0 50px rgba(212, 175, 55, 0.2),
+                0 0 70px rgba(212, 175, 55, 0.4);
+            filter: brightness(1.25) saturate(1.2);
+            animation: cardFloat 0.5s ease-out;
+        }
+
+        @keyframes cardFloat {
+            0% {
+                transform: translateY(-30px) rotateX(20deg) rotateZ(3deg) rotateY(5deg) scale(1.08);
+            }
+            100% {
+                transform: translateY(-40px) rotateX(25deg) rotateZ(5deg) rotateY(8deg) scale(1.12);
+            }
         }
 
         .gallery-card::after {
@@ -1105,7 +1136,7 @@
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 350px;
+            width: 380px;
             background: rgba(30, 15, 42, 0.95);
             backdrop-filter: blur(10px);
             border: 2px solid rgba(212, 175, 55, 0.4);
@@ -1114,6 +1145,53 @@
             z-index: 5500;
             box-shadow: 0 20px 60px rgba(212, 175, 55, 0.25);
             animation: playerSlideIn 0.6s ease-out;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .music-selector {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .music-selector label {
+            display: block;
+            color: #d4af37;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .music-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .music-option input[type="radio"] {
+            cursor: pointer;
+            accent-color: #d4af37;
+            width: 16px;
+            height: 16px;
+        }
+
+        .music-option label {
+            margin: 0;
+            flex: 1;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .music-option:hover {
+            background: rgba(212, 175, 55, 0.1);
         }
 
         @keyframes playerSlideIn {
@@ -1450,7 +1528,7 @@
 
     <!-- Background Music Player -->
     <div class="music-player-fixed" id="musicPlayer">
-        <h3>🎵 Background Music</h3>
+        <h3>🎵 Music Player</h3>
         <div class="music-controls">
             <button class="play-btn" id="playBtn" onclick="toggleMusic()">▶</button>
             <div class="volume-control">
@@ -1459,6 +1537,54 @@
                 <span class="volume-label" id="volumeValue">30%</span>
             </div>
         </div>
+
+        <!-- Gallery Music Selection -->
+        <div class="music-selector" id="galleryMusicSelector" style="display:none;">
+            <label>Gallery Songs (Pick One)</label>
+            <div class="music-option">
+                <input type="radio" name="galleryMusic" value="song1" onchange="changeGalleryMusic('song1')">
+                <label>Song 1 - Romantic Vibes</label>
+            </div>
+            <div class="music-option">
+                <input type="radio" name="galleryMusic" value="song2" onchange="changeGalleryMusic('song2')">
+                <label>Song 2 - Gentle Flow</label>
+            </div>
+            <div class="music-option">
+                <input type="radio" name="galleryMusic" value="song3" onchange="changeGalleryMusic('song3')" checked>
+                <label>Song 3 - Background Melody</label>
+            </div>
+        </div>
+
+        <!-- Story Music Selection -->
+        <div class="music-selector" id="storyMusicSelector" style="display:none;">
+            <label>Story Songs (Pick One)</label>
+            <div class="music-option">
+                <input type="radio" name="storyMusic" value="song4" onchange="changeStoryMusic('song4')" checked>
+                <label>Song 4 - Emotional Journey</label>
+            </div>
+            <div class="music-option">
+                <input type="radio" name="storyMusic" value="song5" onchange="changeStoryMusic('song5')">
+                <label>Song 5 - Deep Connection</label>
+            </div>
+        </div>
+
+        <!-- Timeline Music Selection -->
+        <div class="music-selector" id="timelineMusicSelector" style="display:none;">
+            <label>Timeline Songs (Pick One)</label>
+            <div class="music-option">
+                <input type="radio" name="timelineMusic" value="song6" onchange="changeTimelineMusic('song6')">
+                <label>Song 6 - Celebration Moment</label>
+            </div>
+            <div class="music-option">
+                <input type="radio" name="timelineMusic" value="song7" onchange="changeTimelineMusic('song7')" checked>
+                <label>Song 7 - Forever Together</label>
+            </div>
+            <div class="music-option">
+                <input type="radio" name="timelineMusic" value="song8" onchange="changeTimelineMusic('song8')">
+                <label>Song 8 - Eternal Love</label>
+            </div>
+        </div>
+
         <audio id="bgMusic" loop>
             <source src="background-music.mp3" type="audio/mpeg">
         </audio>
@@ -1514,22 +1640,62 @@
                     const contentWrapper = document.getElementById('contentWrapper');
 
                     if (flyingOptions) flyingOptions.classList.remove('active');
-                    if (contentWrapper) contentWrapper.classList.add('active');
 
+                    // Remove all section classes
+                    if (contentWrapper) {
+                        contentWrapper.classList.remove('show-gallery', 'show-story', 'show-timeline', 'show-closing');
+                    }
+
+                    // Show only selected section
                     if (type === 'gallery') {
-                        const gallery = document.getElementById('gallery');
-                        if (gallery) gallery.scrollIntoView({ behavior: 'smooth' });
+                        if (contentWrapper) contentWrapper.classList.add('show-gallery', 'active');
+                        showMusicSelector('gallery');
                     } else if (type === 'story') {
-                        const story = document.getElementById('story');
-                        if (story) story.scrollIntoView({ behavior: 'smooth' });
+                        if (contentWrapper) contentWrapper.classList.add('show-story', 'active');
+                        showMusicSelector('story');
                     } else if (type === 'timeline') {
-                        const timeline = document.getElementById('timeline');
-                        if (timeline) timeline.scrollIntoView({ behavior: 'smooth' });
+                        if (contentWrapper) contentWrapper.classList.add('show-timeline', 'active');
+                        showMusicSelector('timeline');
+                    }
+
+                    // Scroll to top
+                    if (contentWrapper) {
+                        contentWrapper.scrollTop = 0;
                     }
                 }, 800);
             } catch (err) {
                 console.error('Error in selectOption:', err);
             }
+        }
+
+        function showMusicSelector(section) {
+            const gallerySelector = document.getElementById('galleryMusicSelector');
+            const storySelector = document.getElementById('storyMusicSelector');
+            const timelineSelector = document.getElementById('timelineMusicSelector');
+
+            if (gallerySelector) gallerySelector.style.display = 'none';
+            if (storySelector) storySelector.style.display = 'none';
+            if (timelineSelector) timelineSelector.style.display = 'none';
+
+            if (section === 'gallery' && gallerySelector) {
+                gallerySelector.style.display = 'block';
+            } else if (section === 'story' && storySelector) {
+                storySelector.style.display = 'block';
+            } else if (section === 'timeline' && timelineSelector) {
+                timelineSelector.style.display = 'block';
+            }
+        }
+
+        function changeGalleryMusic(song) {
+            console.log('Playing gallery song:', song);
+        }
+
+        function changeStoryMusic(song) {
+            console.log('Playing story song:', song);
+        }
+
+        function changeTimelineMusic(song) {
+            console.log('Playing timeline song:', song);
         }
 
         // Gallery
