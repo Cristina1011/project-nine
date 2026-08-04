@@ -144,14 +144,16 @@
         }
 
         .cover-hearts {
-            font-size: 2.5rem;
+            font-size: 3.5rem;
             animation: heartSubtle 2s ease-in-out infinite;
-            filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.2));
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+            margin-top: 30px;
+            letter-spacing: 15px;
         }
 
         @keyframes heartSubtle {
-            0%, 100% { transform: scale(1) translateY(0); filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.2)); }
-            50% { transform: scale(1.15) translateY(-8px); filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3)); }
+            0%, 100% { transform: scale(1) translateY(0); filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3)); }
+            50% { transform: scale(1.2) translateY(-15px); filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.5)); }
         }
 
         @keyframes heartPulse {
@@ -215,16 +217,17 @@
             position: absolute;
             width: 320px;
             height: 400px;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
-            border: 2px solid rgba(212, 175, 55, 0.4);
-            border-radius: 12px;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid rgba(212, 175, 55, 0.6);
+            border-radius: 16px;
             cursor: pointer;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.2);
+            justify-content: flex-end;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 30px 80px rgba(212, 175, 55, 0.3), inset 0 0 40px rgba(212, 175, 55, 0.08);
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             transform-style: preserve-3d;
             overflow: hidden;
@@ -253,35 +256,36 @@
             transform: scale(1.1);
         }
 
-        /* Flying animations for each card */
+        /* Static 3D positioned cards */
         .option-1 {
-            animation: fly1 4s ease-in-out infinite;
-        }
-
-        @keyframes fly1 {
-            0% { transform: translate(-400px, -200px) rotateX(20deg) rotateY(-30deg) rotateZ(10deg); }
-            50% { transform: translate(0, -250px) rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
-            100% { transform: translate(-400px, -200px) rotateX(20deg) rotateY(-30deg) rotateZ(10deg); }
+            left: 5%;
+            top: 50%;
+            transform: translateY(-50%) rotateY(15deg) rotateX(5deg);
+            animation: cardEntrance 0.8s ease-out 0.3s backwards;
         }
 
         .option-2 {
-            animation: fly2 4s ease-in-out infinite;
-        }
-
-        @keyframes fly2 {
-            0% { transform: translate(0, -300px) rotateX(-10deg) rotateY(0deg) rotateZ(0deg) scale(1); }
-            50% { transform: translate(0, -380px) rotateX(0deg) rotateY(0deg) rotateZ(360deg) scale(1.05); }
-            100% { transform: translate(0, -300px) rotateX(-10deg) rotateY(0deg) rotateZ(0deg) scale(1); }
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%) rotateY(0deg) scale(1.08);
+            animation: cardEntrance 0.8s ease-out 0.2s backwards;
         }
 
         .option-3 {
-            animation: fly3 4s ease-in-out infinite;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%) rotateY(-15deg) rotateX(5deg);
+            animation: cardEntrance 0.8s ease-out 0.4s backwards;
         }
 
-        @keyframes fly3 {
-            0% { transform: translate(400px, -200px) rotateX(20deg) rotateY(30deg) rotateZ(-10deg); }
-            50% { transform: translate(0, -250px) rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
-            100% { transform: translate(400px, -200px) rotateX(20deg) rotateY(30deg) rotateZ(-10deg); }
+        @keyframes cardEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(100px) rotateX(90deg);
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         .option-card.selected {
@@ -309,24 +313,25 @@
         }
 
         .option-title {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-weight: 300;
             letter-spacing: 3px;
             text-transform: uppercase;
-            color: #d4af37;
+            color: #ffd700;
             z-index: 2;
             position: relative;
-            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
-            margin-bottom: 20px;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.8);
+            margin-bottom: 8px;
         }
 
         .option-subtitle {
-            font-size: 1rem;
-            color: #b0a8a0;
+            font-size: 0.85rem;
+            color: #d4c5b9;
             letter-spacing: 1.5px;
             z-index: 2;
             position: relative;
             font-style: italic;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
         }
 
         /* Content Sections */
@@ -824,8 +829,20 @@
             border: 2px solid rgba(212, 175, 55, 0.4);
             border-radius: 8px;
             padding: 25px;
-            z-index: 800;
+            z-index: 5500;
             box-shadow: 0 20px 60px rgba(212, 175, 55, 0.25);
+            animation: playerSlideIn 0.6s ease-out;
+        }
+
+        @keyframes playerSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(100px) translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) translateX(0);
+            }
         }
 
         .music-player-fixed h3 {
@@ -999,7 +1016,7 @@
                 <div class="book-right">
                     <div class="cover-overlay">
                         <div class="cover-text">HAPPY 3 YEARS</div>
-                        <div class="cover-hearts">💜</div>
+                        <div class="cover-hearts">💜 ❤️</div>
                     </div>
                 </div>
             </div>
@@ -1009,19 +1026,25 @@
     <!-- Flying Options Screen -->
     <div class="flying-options-scene" id="flyingOptions">
         <div class="flying-options-container">
-            <div class="option-card option-1" onclick="selectOption('gallery')">
-                <div class="option-title">Gallery</div>
-                <div class="option-subtitle">57 Beautiful Moments</div>
+            <div class="option-card option-1" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), url('vu2nd/54.png');" onclick="selectOption('gallery')">
+                <div style="padding-bottom: 30px;">
+                    <div class="option-title">Gallery</div>
+                    <div class="option-subtitle">57 Beautiful Moments</div>
+                </div>
             </div>
 
-            <div class="option-card option-2" onclick="selectOption('story')">
-                <div class="option-title">Story</div>
-                <div class="option-subtitle">Our Love Journey</div>
+            <div class="option-card option-2" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), url('vu2nd/56.png');" onclick="selectOption('story')">
+                <div style="padding-bottom: 30px;">
+                    <div class="option-title">Story</div>
+                    <div class="option-subtitle">Our Love Journey</div>
+                </div>
             </div>
 
-            <div class="option-card option-3" onclick="selectOption('timeline')">
-                <div class="option-title">Timeline</div>
-                <div class="option-subtitle">3 Year Milestones</div>
+            <div class="option-card option-3" style="background-image: linear-gradient(to top, rgba(0,0,0,0.8), transparent), url('vu2nd/55.png');" onclick="selectOption('timeline')">
+                <div style="padding-bottom: 30px;">
+                    <div class="option-title">Timeline</div>
+                    <div class="option-subtitle">3 Year Milestones</div>
+                </div>
             </div>
         </div>
     </div>
