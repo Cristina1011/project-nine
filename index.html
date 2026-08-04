@@ -417,16 +417,13 @@
             overflow-y: auto;
             z-index: 1;
             background: #0a0a0a;
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
+            display: none !important;
             perspective: 1200px;
             transform-style: preserve-3d;
         }
 
         .content-wrapper.active {
-            opacity: 1 !important;
-            visibility: visible !important;
+            display: block !important;
             pointer-events: auto !important;
         }
 
