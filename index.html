@@ -1950,7 +1950,11 @@
         document.addEventListener('DOMContentLoaded', () => {
             initGallery();
             bgMusic.volume = 0.3;
+            bgMusic.pause(); // Ensure music doesn't auto-play
+            bgMusic.currentTime = 0;
             document.getElementById('volumeSlider').value = 30;
+            isPlaying = false;
+            playBtn.textContent = '▶';
         });
     </script>
 
