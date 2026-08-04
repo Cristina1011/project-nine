@@ -440,8 +440,39 @@
 
         .gallery-card:hover {
             border-color: #d4af37;
-            transform: translateY(-20px) rotateX(15deg) rotateZ(5deg);
-            box-shadow: 0 40px 80px rgba(212, 175, 55, 0.3);
+            transform: translateY(-25px) rotateX(15deg) rotateZ(5deg);
+            box-shadow: 0 50px 100px rgba(212, 175, 55, 0.4), inset 0 0 30px rgba(212, 175, 55, 0.1);
+        }
+
+        .gallery-card::after {
+            content: '♥';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 4rem;
+            color: #d4af37;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.5);
+            transition: all 0.5s ease;
+            z-index: 10;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.6));
+        }
+
+        .gallery-card:hover::after {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+            animation: heartFloat 0.8s ease-out;
+        }
+
+        @keyframes heartFloat {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5) translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -150px) scale(1);
+                opacity: 0;
+            }
         }
 
         .gallery-card img {
@@ -452,7 +483,7 @@
         }
 
         .gallery-card:hover img {
-            transform: scale(1.15) rotateZ(2deg);
+            transform: scale(1.2) rotateZ(3deg);
         }
 
         .gallery-card-title {
@@ -708,21 +739,50 @@
             max-width: 100%;
             max-height: 80vh;
             object-fit: contain;
-            border-radius: 8px;
-            border: 2px solid #d4af37;
-            box-shadow: 0 0 60px rgba(212, 175, 55, 0.4);
-            animation: imageZoomIn 0.5s ease-out;
+            border-radius: 12px;
+            border: 3px solid #d4af37;
+            box-shadow: 0 0 80px rgba(212, 175, 55, 0.5), inset 0 0 40px rgba(212, 175, 55, 0.1);
+            animation: imageZoomIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         @keyframes imageZoomIn {
             from {
                 opacity: 0;
-                transform: scale(0.8) rotateY(90deg);
+                transform: scale(0.7) rotateY(45deg) rotateX(20deg);
             }
             to {
                 opacity: 1;
-                transform: scale(1) rotateY(0deg);
+                transform: scale(1) rotateY(0deg) rotateX(0deg);
             }
+        }
+
+        .carousel-autoplay-indicator {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #d4af37;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-autoplay-indicator:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+        }
+
+        .carousel-autoplay-indicator.playing::before {
+            content: '⏸ ';
+        }
+
+        .carousel-autoplay-indicator.paused::before {
+            content: '▶ ';
         }
 
         .carousel-nav {
@@ -777,12 +837,14 @@
             left: 50%;
             transform: translateX(-50%);
             color: #d4af37;
-            font-size: 1rem;
+            font-size: 1.1rem;
             letter-spacing: 2px;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 12px 25px;
-            border-radius: 4px;
-            border: 1px solid #d4af37;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px 30px;
+            border-radius: 25px;
+            border: 2px solid #d4af37;
+            font-weight: 600;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.2);
         }
 
         /* Closing */
@@ -1157,6 +1219,7 @@
     <!-- Carousel Modal -->
     <div class="carousel-modal" id="carouselModal">
         <div class="carousel-content">
+            <div class="carousel-autoplay-indicator playing" id="autoplayIndicator" onclick="toggleAutoplay()"></div>
             <div class="carousel-nav prev" onclick="prevSlide()">❮</div>
             <img id="carouselImage" src="" alt="Carousel Image">
             <div class="carousel-nav next" onclick="nextSlide()">❯</div>
@@ -1254,15 +1317,19 @@
         }
 
         let currentPhotoIndex = 0;
+        let autoplayInterval = null;
+        let isAutoplayingCarousel = true;
 
         function openCarousel(index) {
             currentPhotoIndex = index;
             updateCarousel();
             document.getElementById('carouselModal').classList.add('active');
+            startAutoplay();
         }
 
         function closeCarousel() {
             document.getElementById('carouselModal').classList.remove('active');
+            stopAutoplay();
         }
 
         function updateCarousel() {
@@ -1274,11 +1341,51 @@
         function nextSlide() {
             currentPhotoIndex = (currentPhotoIndex + 1) % imageNumbers.length;
             updateCarousel();
+            resetAutoplay();
         }
 
         function prevSlide() {
             currentPhotoIndex = currentPhotoIndex === 0 ? imageNumbers.length - 1 : currentPhotoIndex - 1;
             updateCarousel();
+            resetAutoplay();
+        }
+
+        function startAutoplay() {
+            if (isAutoplayingCarousel && !autoplayInterval) {
+                autoplayInterval = setInterval(() => {
+                    currentPhotoIndex = (currentPhotoIndex + 1) % imageNumbers.length;
+                    updateCarousel();
+                }, 3500);
+            }
+        }
+
+        function stopAutoplay() {
+            if (autoplayInterval) {
+                clearInterval(autoplayInterval);
+                autoplayInterval = null;
+            }
+        }
+
+        function resetAutoplay() {
+            stopAutoplay();
+            if (isAutoplayingCarousel) {
+                startAutoplay();
+            }
+        }
+
+        function toggleAutoplay() {
+            isAutoplayingCarousel = !isAutoplayingCarousel;
+            const indicator = document.getElementById('autoplayIndicator');
+
+            if (isAutoplayingCarousel) {
+                indicator.classList.remove('paused');
+                indicator.classList.add('playing');
+                startAutoplay();
+            } else {
+                indicator.classList.remove('playing');
+                indicator.classList.add('paused');
+                stopAutoplay();
+            }
         }
 
         document.addEventListener('keydown', (e) => {
@@ -1286,6 +1393,7 @@
                 if (e.key === 'ArrowRight') nextSlide();
                 if (e.key === 'ArrowLeft') prevSlide();
                 if (e.key === 'Escape') closeCarousel();
+                if (e.key === ' ') toggleAutoplay();
             }
         });
 
