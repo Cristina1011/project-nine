@@ -1846,6 +1846,8 @@
         }
 
         function backToOptions() {
+            console.log('=== backToOptions called ===');
+            console.trace();
             const contentWrapper = document.getElementById('contentWrapper');
             const flyingOptions = document.getElementById('flyingOptions');
             const backBtn = document.getElementById('backBtn');
@@ -1860,6 +1862,7 @@
             if (playBtn) playBtn.textContent = '▶';
 
             if (contentWrapper) {
+                console.log('Removing active and show-* classes');
                 contentWrapper.classList.remove('active');
                 contentWrapper.classList.remove('show-gallery', 'show-story', 'show-timeline', 'show-closing');
             }
@@ -2098,6 +2101,18 @@
             document.getElementById('volumeSlider').value = 30;
             isPlaying = false;
             playBtn.textContent = '▶';
+
+            // Monitor class changes to detect unexpected removals
+            const wrapper = document.getElementById('contentWrapper');
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        console.log('ContentWrapper classes changed:', wrapper.className);
+                    }
+                });
+            });
+
+            observer.observe(wrapper, { attributes: true, attributeFilter: ['class'] });
         });
     </script>
 
