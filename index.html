@@ -426,21 +426,9 @@
         }
 
         .content-wrapper.active {
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-            animation: contentAppear 1s ease-out forwards;
-        }
-
-        @keyframes contentAppear {
-            from {
-                opacity: 0;
-                transform: translateZ(-100px) rotateX(10deg);
-            }
-            to {
-                opacity: 1;
-                transform: translateZ(0) rotateX(0deg);
-            }
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
         }
 
         .content-wrapper::-webkit-scrollbar {
