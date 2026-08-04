@@ -526,7 +526,7 @@
             z-index: 1;
         }
 
-        /* Back button - hidden by default */
+        /* Back button - styled and positioned, visibility managed by JavaScript */
         .back-button {
             position: fixed;
             top: 30px;
@@ -543,20 +543,6 @@
             font-family: 'Georgia', serif;
             letter-spacing: 2px;
             text-transform: uppercase;
-            display: none !important;
-            visibility: hidden !important;
-            pointer-events: none !important;
-            opacity: 0 !important;
-        }
-
-        /* Show back button only when viewing sections */
-        .content-wrapper.show-gallery .back-button,
-        .content-wrapper.show-story .back-button,
-        .content-wrapper.show-timeline .back-button {
-            display: block !important;
-            visibility: visible !important;
-            pointer-events: auto !important;
-            opacity: 1 !important;
         }
 
         .back-button:hover {
@@ -1472,19 +1458,20 @@
         </div>
     </div>
 
+    <!-- Back Button (outside sections so it's always accessible) -->
+    <button class="back-button" onclick="backToOptions()" id="backBtn">← Back to Options</button>
+
     <!-- Main Content -->
     <div class="content-wrapper" id="contentWrapper">
 
         <!-- Gallery Section -->
         <section class="gallery-section" id="gallery">
-            <button class="back-button" onclick="backToOptions()">← Back to Options</button>
             <h2 class="section-title">Our Moments</h2>
             <div class="gallery-grid" id="galleryGrid"></div>
         </section>
 
         <!-- Story Section -->
         <section class="story-section" id="story">
-            <button class="back-button" onclick="backToOptions()">← Back to Options</button>
             <div class="story-content">
                 <h2 class="section-title">Our Love Story</h2>
                 <div class="story-text">
@@ -1518,7 +1505,6 @@
 
         <!-- Timeline Section -->
         <section class="timeline-section" id="timeline">
-            <button class="back-button" onclick="backToOptions()">← Back to Options</button>
             <h2 class="section-title">3 Year Milestones</h2>
             <div class="timeline-container">
                 <div class="timeline">
@@ -1715,6 +1701,15 @@
                         contentWrapper.classList.remove('show-gallery', 'show-story', 'show-timeline', 'show-closing');
                     }
 
+                    // Show back button
+                    const backBtn = document.getElementById('backBtn');
+                    if (backBtn) {
+                        backBtn.style.display = 'block';
+                        backBtn.style.visibility = 'visible';
+                        backBtn.style.pointerEvents = 'auto';
+                        backBtn.style.opacity = '1';
+                    }
+
                     // Show only selected section
                     if (type === 'gallery') {
                         if (contentWrapper) {
@@ -1767,6 +1762,7 @@
         function backToOptions() {
             const contentWrapper = document.getElementById('contentWrapper');
             const flyingOptions = document.getElementById('flyingOptions');
+            const backBtn = document.getElementById('backBtn');
 
             if (contentWrapper) {
                 contentWrapper.classList.remove('active');
@@ -1775,6 +1771,12 @@
 
             if (flyingOptions) {
                 flyingOptions.classList.add('active');
+            }
+
+            if (backBtn) {
+                backBtn.style.display = 'none';
+                backBtn.style.visibility = 'hidden';
+                backBtn.style.pointerEvents = 'none';
             }
 
             console.log('Returning to options');
