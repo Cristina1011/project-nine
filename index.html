@@ -101,9 +101,9 @@
             height: 100%;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(212,175,55,0.3), rgba(0,0,0,0.6));
+            background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(212,175,55,0.2), rgba(0,0,0,0.6));
             z-index: 10;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
         }
 
         .cover-overlay {
@@ -133,25 +133,25 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6)) drop-shadow(0 0 40px rgba(212, 175, 55, 0.3));
-            animation: textGlow 2s ease-in-out infinite;
-            text-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
+            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));
+            animation: textSoftGlow 3s ease-in-out infinite;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
         }
 
-        @keyframes textGlow {
-            0%, 100% { filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.6)) drop-shadow(0 0 40px rgba(212, 175, 55, 0.3)); }
-            50% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.8)) drop-shadow(0 0 60px rgba(212, 175, 55, 0.5)); }
+        @keyframes textSoftGlow {
+            0%, 100% { filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3)); }
+            50% { filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.4)); }
         }
 
         .cover-hearts {
             font-size: 2.5rem;
-            animation: heartMagic 1.5s ease-in-out infinite;
-            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.5)) drop-shadow(0 0 30px rgba(212, 175, 55, 0.3));
+            animation: heartSubtle 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.2));
         }
 
-        @keyframes heartMagic {
-            0%, 100% { transform: scale(1) translateY(0); filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.5)); }
-            50% { transform: scale(1.2) translateY(-10px); filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.8)); }
+        @keyframes heartSubtle {
+            0%, 100% { transform: scale(1) translateY(0); filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.2)); }
+            50% { transform: scale(1.15) translateY(-8px); filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3)); }
         }
 
         @keyframes heartPulse {
