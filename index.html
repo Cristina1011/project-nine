@@ -477,12 +477,28 @@
             overflow: visible !important;
         }
 
+        .content-wrapper.show-gallery .story-section,
+        .content-wrapper.show-gallery .timeline-section,
+        .content-wrapper.show-gallery .closing-section {
+            display: none !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
         .content-wrapper.show-story .story-section {
             display: flex !important;
             visibility: visible !important;
             pointer-events: auto !important;
             height: auto !important;
             overflow: visible !important;
+        }
+
+        .content-wrapper.show-story .gallery-section,
+        .content-wrapper.show-story .timeline-section,
+        .content-wrapper.show-story .closing-section {
+            display: none !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
         }
 
         .content-wrapper.show-timeline .timeline-section {
@@ -493,12 +509,28 @@
             overflow: visible !important;
         }
 
+        .content-wrapper.show-timeline .gallery-section,
+        .content-wrapper.show-timeline .story-section,
+        .content-wrapper.show-timeline .closing-section {
+            display: none !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
         .content-wrapper.show-closing .closing-section {
             display: block !important;
             visibility: visible !important;
             pointer-events: auto !important;
             height: auto !important;
             overflow: visible !important;
+        }
+
+        .content-wrapper.show-closing .gallery-section,
+        .content-wrapper.show-closing .story-section,
+        .content-wrapper.show-closing .timeline-section {
+            display: none !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
         }
 
         /* Gallery Section */
