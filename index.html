@@ -1856,6 +1856,38 @@
             console.log('Returning to options - music stopped');
         }
 
+        // Test function to check element visibility
+        function testElementVisibility() {
+            console.log('=== VISIBILITY TEST ===');
+            const gallery = document.querySelector('.gallery-section');
+            const story = document.querySelector('.story-section');
+            const timeline = document.querySelector('.timeline-section');
+            const wrapper = document.getElementById('contentWrapper');
+
+            const checkElement = (name, el) => {
+                if (!el) {
+                    console.log(`${name}: NOT FOUND`);
+                    return;
+                }
+                const style = window.getComputedStyle(el);
+                console.log(`${name}:`, {
+                    display: style.display,
+                    visibility: style.visibility,
+                    opacity: style.opacity,
+                    height: style.height,
+                    found: true
+                });
+            };
+
+            checkElement('Gallery', gallery);
+            checkElement('Story', story);
+            checkElement('Timeline', timeline);
+            console.log('Wrapper classes:', wrapper?.className);
+        }
+
+        // Make test function accessible from console
+        window.testElementVisibility = testElementVisibility;
+
         function changeGalleryMusic(song) {
             console.log('Playing gallery song:', song);
             playSelectedSong(song);
