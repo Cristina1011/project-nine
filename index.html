@@ -456,25 +456,29 @@
             border-radius: 4px;
         }
 
-        /* Section visibility */
-        .gallery-section, .story-section, .timeline-section, .closing-section {
-            display: none;
+        /* Section visibility - default all hidden */
+        .gallery-section,
+        .story-section,
+        .timeline-section,
+        .closing-section {
+            display: none !important;
         }
 
+        /* Show only selected section with correct display values */
         .content-wrapper.show-gallery .gallery-section {
-            display: block;
+            display: block !important;
         }
 
         .content-wrapper.show-story .story-section {
-            display: block;
+            display: flex !important;
         }
 
         .content-wrapper.show-timeline .timeline-section {
-            display: block;
+            display: flex !important;
         }
 
         .content-wrapper.show-closing .closing-section {
-            display: block;
+            display: block !important;
         }
 
         /* Gallery Section */
@@ -1629,6 +1633,7 @@
         });
 
         function selectOption(type) {
+            console.log('selectOption called with type:', type);
             try {
                 const selected = event?.target?.closest('.option-card');
                 if (selected) {
@@ -1639,6 +1644,8 @@
                     const flyingOptions = document.getElementById('flyingOptions');
                     const contentWrapper = document.getElementById('contentWrapper');
 
+                    console.log('contentWrapper found:', !!contentWrapper);
+
                     if (flyingOptions) flyingOptions.classList.remove('active');
 
                     // Remove all section classes
@@ -1648,13 +1655,22 @@
 
                     // Show only selected section
                     if (type === 'gallery') {
-                        if (contentWrapper) contentWrapper.classList.add('show-gallery', 'active');
+                        if (contentWrapper) {
+                            contentWrapper.classList.add('show-gallery', 'active');
+                            console.log('Added show-gallery class. Classes:', contentWrapper.className);
+                        }
                         showMusicSelector('gallery');
                     } else if (type === 'story') {
-                        if (contentWrapper) contentWrapper.classList.add('show-story', 'active');
+                        if (contentWrapper) {
+                            contentWrapper.classList.add('show-story', 'active');
+                            console.log('Added show-story class. Classes:', contentWrapper.className);
+                        }
                         showMusicSelector('story');
                     } else if (type === 'timeline') {
-                        if (contentWrapper) contentWrapper.classList.add('show-timeline', 'active');
+                        if (contentWrapper) {
+                            contentWrapper.classList.add('show-timeline', 'active');
+                            console.log('Added show-timeline class. Classes:', contentWrapper.className);
+                        }
                         showMusicSelector('timeline');
                     }
 
