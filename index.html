@@ -506,6 +506,30 @@
             z-index: 1;
         }
 
+        .back-button {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            z-index: 2000;
+            background: rgba(212, 175, 55, 0.2);
+            border: 2px solid #d4af37;
+            color: #d4af37;
+            padding: 12px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-family: 'Georgia', serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .back-button:hover {
+            background: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            transform: scale(1.05);
+        }
+
         .section-title {
             text-align: center;
             font-size: 3rem;
@@ -1418,12 +1442,14 @@
 
         <!-- Gallery Section -->
         <section class="gallery-section" id="gallery">
+            <button class="back-button" onclick="backToOptions()">← Back to Options</button>
             <h2 class="section-title">Our Moments</h2>
             <div class="gallery-grid" id="galleryGrid"></div>
         </section>
 
         <!-- Story Section -->
         <section class="story-section" id="story">
+            <button class="back-button" onclick="backToOptions()">← Back to Options</button>
             <div class="story-content">
                 <h2 class="section-title">Our Love Story</h2>
                 <div class="story-text">
@@ -1457,6 +1483,7 @@
 
         <!-- Timeline Section -->
         <section class="timeline-section" id="timeline">
+            <button class="back-button" onclick="backToOptions()">← Back to Options</button>
             <h2 class="section-title">3 Year Milestones</h2>
             <div class="timeline-container">
                 <div class="timeline">
@@ -1702,16 +1729,48 @@
             }
         }
 
+        function backToOptions() {
+            const contentWrapper = document.getElementById('contentWrapper');
+            const flyingOptions = document.getElementById('flyingOptions');
+
+            if (contentWrapper) {
+                contentWrapper.classList.remove('active');
+                contentWrapper.classList.remove('show-gallery', 'show-story', 'show-timeline', 'show-closing');
+            }
+
+            if (flyingOptions) {
+                flyingOptions.classList.add('active');
+            }
+
+            console.log('Returning to options');
+        }
+
         function changeGalleryMusic(song) {
             console.log('Playing gallery song:', song);
+            playSelectedSong(song);
         }
 
         function changeStoryMusic(song) {
             console.log('Playing story song:', song);
+            playSelectedSong(song);
         }
 
         function changeTimelineMusic(song) {
             console.log('Playing timeline song:', song);
+            playSelectedSong(song);
+        }
+
+        function playSelectedSong(songName) {
+            const bgMusic = document.getElementById('bgMusic');
+            const source = bgMusic.querySelector('source');
+
+            if (source) {
+                source.src = `songs/${songName}.mp3`;
+                bgMusic.load();
+                bgMusic.play().catch(err => console.log('Play error:', err));
+                isPlaying = true;
+                playBtn.textContent = '⏸';
+            }
         }
 
         // Gallery
