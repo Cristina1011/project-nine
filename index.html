@@ -824,12 +824,92 @@
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-align: center;
         }
 
-        .music-player-fixed audio {
+        .music-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .play-btn {
+            background: linear-gradient(135deg, #d4af37, #c9a961);
+            border: none;
+            color: #0a0a0a;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .play-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .volume-control {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .volume-slider {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(212, 175, 55, 0.2);
+            outline: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #d4af37;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #d4af37;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .volume-label {
+            font-size: 0.8rem;
+            color: #d4af37;
+            min-width: 25px;
+        }
+
+        .audio-section audio {
             width: 100%;
+            margin-top: 20px;
+        }
+
+        audio::-webkit-media-controls-panel {
+            background-color: rgba(212, 175, 55, 0.1);
+        }
+
+        audio::-webkit-media-controls-mute-button {
+            filter: invert(1);
         }
 
         /* Responsive */
@@ -1069,10 +1149,21 @@
         </div>
     </div>
 
-    <!-- Music -->
-    <audio id="bgMusic" loop>
-        <source src="background-music.mp3" type="audio/mpeg">
-    </audio>
+    <!-- Background Music Player -->
+    <div class="music-player-fixed" id="musicPlayer">
+        <h3>🎵 Background Music</h3>
+        <div class="music-controls">
+            <button class="play-btn" id="playBtn" onclick="toggleMusic()">▶</button>
+            <div class="volume-control">
+                <span class="volume-label">🔊</span>
+                <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="30" onchange="setVolume(this.value)">
+                <span class="volume-label" id="volumeValue">30%</span>
+            </div>
+        </div>
+        <audio id="bgMusic" loop>
+            <source src="background-music.mp3" type="audio/mpeg">
+        </audio>
+    </div>
 
     <script>
         const imageNumbers = Array.from({length: 57}, (_, i) => i + 1);
@@ -1182,11 +1273,39 @@
             }
         });
 
+        const bgMusic = document.getElementById('bgMusic');
+        const playBtn = document.getElementById('playBtn');
+        let isPlaying = false;
+
         function playMusic() {
-            document.getElementById('bgMusic').play().catch(err => console.log('Auto-play blocked'));
+            bgMusic.volume = 0.3;
+            bgMusic.play().catch(err => console.log('Auto-play blocked'));
+            isPlaying = true;
+            playBtn.textContent = '⏸';
         }
 
-        document.addEventListener('DOMContentLoaded', initGallery);
+        function toggleMusic() {
+            if (isPlaying) {
+                bgMusic.pause();
+                playBtn.textContent = '▶';
+                isPlaying = false;
+            } else {
+                bgMusic.play();
+                playBtn.textContent = '⏸';
+                isPlaying = true;
+            }
+        }
+
+        function setVolume(value) {
+            bgMusic.volume = value / 100;
+            document.getElementById('volumeValue').textContent = value + '%';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initGallery();
+            bgMusic.volume = 0.3;
+            document.getElementById('volumeSlider').value = 30;
+        });
     </script>
 
 </body>
