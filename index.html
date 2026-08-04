@@ -44,13 +44,14 @@
             background-size: 200px 200px;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.15;
-            animation: starsFloat 20s linear infinite;
+            opacity: 0.1;
+            animation: starsFloat 30s linear infinite;
+            will-change: transform;
         }
 
         @keyframes starsFloat {
-            0% { transform: translateY(0) translateX(0); }
-            100% { transform: translateY(-200px) translateX(10px); }
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-400px); }
         }
 
         /* Book Cover Scene */
@@ -245,8 +246,8 @@
         }
 
         @keyframes optionsGlow {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1.2; }
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 1.1; }
         }
 
         .flying-options-scene.active {
@@ -1051,8 +1052,8 @@
         }
 
         @keyframes ambientGlow {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1.2; }
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 1.1; }
         }
 
         .closing-section > * {
@@ -1500,21 +1501,33 @@
         });
 
         function selectOption(type) {
-            const selected = event.target.closest('.option-card');
-            selected.classList.add('selected');
-
-            setTimeout(() => {
-                flyingOptions.classList.remove('active');
-                document.getElementById('contentWrapper').classList.add('active');
-
-                if (type === 'gallery') {
-                    document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
-                } else if (type === 'story') {
-                    document.getElementById('story').scrollIntoView({ behavior: 'smooth' });
-                } else if (type === 'timeline') {
-                    document.getElementById('timeline').scrollIntoView({ behavior: 'smooth' });
+            try {
+                const selected = event?.target?.closest('.option-card');
+                if (selected) {
+                    selected.classList.add('selected');
                 }
-            }, 800);
+
+                setTimeout(() => {
+                    const flyingOptions = document.getElementById('flyingOptions');
+                    const contentWrapper = document.getElementById('contentWrapper');
+
+                    if (flyingOptions) flyingOptions.classList.remove('active');
+                    if (contentWrapper) contentWrapper.classList.add('active');
+
+                    if (type === 'gallery') {
+                        const gallery = document.getElementById('gallery');
+                        if (gallery) gallery.scrollIntoView({ behavior: 'smooth' });
+                    } else if (type === 'story') {
+                        const story = document.getElementById('story');
+                        if (story) story.scrollIntoView({ behavior: 'smooth' });
+                    } else if (type === 'timeline') {
+                        const timeline = document.getElementById('timeline');
+                        if (timeline) timeline.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }, 800);
+            } catch (err) {
+                console.error('Error in selectOption:', err);
+            }
         }
 
         // Gallery
