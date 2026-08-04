@@ -1753,18 +1753,44 @@
                         if (contentWrapper) {
                             contentWrapper.classList.add('show-gallery', 'active');
                             console.log('✓ Gallery section activated');
+                            setTimeout(() => {
+                                const gallery = document.querySelector('.gallery-section');
+                                if (gallery) {
+                                    const style = window.getComputedStyle(gallery);
+                                    console.log('Gallery computed - display:', style.display, 'visibility:', style.visibility);
+                                }
+                            }, 100);
                         }
                         showMusicSelector('gallery');
                     } else if (type === 'story') {
                         if (contentWrapper) {
                             contentWrapper.classList.add('show-story', 'active');
                             console.log('✓ Story section activated');
+                            console.log('ContentWrapper classes:', contentWrapper.className);
+                            setTimeout(() => {
+                                const story = document.querySelector('.story-section');
+                                if (story) {
+                                    const style = window.getComputedStyle(story);
+                                    console.log('Story computed - display:', style.display, 'visibility:', style.visibility, 'height:', style.height);
+                                } else {
+                                    console.log('ERROR: Story section not found');
+                                }
+                            }, 100);
                         }
                         showMusicSelector('story');
                     } else if (type === 'timeline') {
                         if (contentWrapper) {
                             contentWrapper.classList.add('show-timeline', 'active');
                             console.log('✓ Timeline section activated');
+                            setTimeout(() => {
+                                const timeline = document.querySelector('.timeline-section');
+                                if (timeline) {
+                                    const style = window.getComputedStyle(timeline);
+                                    console.log('Timeline computed - display:', style.display, 'visibility:', style.visibility);
+                                } else {
+                                    console.log('ERROR: Timeline section not found');
+                                }
+                            }, 100);
                         }
                         showMusicSelector('timeline');
                     }
