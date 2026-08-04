@@ -1637,8 +1637,8 @@
             </div>
         </div>
 
-        <audio id="bgMusic" loop>
-            <source src="background-music.mp3" type="audio/mpeg">
+        <audio id="bgMusic">
+            <source src="" type="audio/mpeg">
         </audio>
     </div>
 
@@ -1764,6 +1764,16 @@
             const flyingOptions = document.getElementById('flyingOptions');
             const backBtn = document.getElementById('backBtn');
 
+            // Stop music when returning to options
+            const bgMusic = document.getElementById('bgMusic');
+            if (bgMusic) {
+                bgMusic.pause();
+                bgMusic.currentTime = 0;
+                bgMusic.src = '';
+            }
+            isPlaying = false;
+            if (playBtn) playBtn.textContent = '▶';
+
             if (contentWrapper) {
                 contentWrapper.classList.remove('active');
                 contentWrapper.classList.remove('show-gallery', 'show-story', 'show-timeline', 'show-closing');
@@ -1779,7 +1789,7 @@
                 backBtn.style.pointerEvents = 'none';
             }
 
-            console.log('Returning to options');
+            console.log('Returning to options - music stopped');
         }
 
         function changeGalleryMusic(song) {
@@ -1802,21 +1812,25 @@
             const source = bgMusic.querySelector('source');
 
             if (source) {
-                // Stop current playback completely
+                // COMPLETELY stop any current playback
                 bgMusic.pause();
                 bgMusic.currentTime = 0;
+                bgMusic.src = ''; // Clear any direct src
+
+                // Remove loop to prevent continuous playback
+                bgMusic.removeAttribute('loop');
 
                 // Set new song source
                 source.src = `songs/${songName}.mp3`;
                 bgMusic.load();
 
-                // Wait a moment for load to initialize, then play
+                // Wait for load, then play solo
                 setTimeout(() => {
                     bgMusic.play().catch(err => console.log('Play error:', err));
                     isPlaying = true;
                     playBtn.textContent = '⏸';
-                    console.log('Playing solo song:', songName);
-                }, 100);
+                    console.log('NOW PLAYING SOLO:', songName);
+                }, 150);
             }
         }
 
