@@ -1769,7 +1769,6 @@
             if (bgMusic) {
                 bgMusic.pause();
                 bgMusic.currentTime = 0;
-                bgMusic.src = '';
             }
             isPlaying = false;
             if (playBtn) playBtn.textContent = '▶';
@@ -1809,28 +1808,40 @@
 
         function playSelectedSong(songName) {
             const bgMusic = document.getElementById('bgMusic');
-            const source = bgMusic.querySelector('source');
 
-            if (source) {
-                // COMPLETELY stop any current playback
+            try {
+                // Stop current playback
                 bgMusic.pause();
                 bgMusic.currentTime = 0;
-                bgMusic.src = ''; // Clear any direct src
 
-                // Remove loop to prevent continuous playback
-                bgMusic.removeAttribute('loop');
+                // Update source element
+                const source = bgMusic.querySelector('source');
+                if (source) {
+                    source.src = `songs/${songName}.mp3`;
+                }
 
-                // Set new song source
-                source.src = `songs/${songName}.mp3`;
+                // Reload and play
                 bgMusic.load();
 
-                // Wait for load, then play solo
+                // Play with small delay to ensure load completes
                 setTimeout(() => {
-                    bgMusic.play().catch(err => console.log('Play error:', err));
-                    isPlaying = true;
-                    playBtn.textContent = '⏸';
-                    console.log('NOW PLAYING SOLO:', songName);
-                }, 150);
+                    const playPromise = bgMusic.play();
+                    if (playPromise !== undefined) {
+                        playPromise
+                            .then(() => {
+                                isPlaying = true;
+                                playBtn.textContent = '⏸';
+                                console.log('NOW PLAYING:', songName);
+                            })
+                            .catch(err => console.log('Play failed:', err));
+                    } else {
+                        isPlaying = true;
+                        playBtn.textContent = '⏸';
+                        console.log('NOW PLAYING:', songName);
+                    }
+                }, 100);
+            } catch (err) {
+                console.error('Error playing song:', err);
             }
         }
 
