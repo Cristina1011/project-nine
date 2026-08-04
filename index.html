@@ -1720,6 +1720,15 @@
         function selectOption(type) {
             console.log('=== selectOption called with type:', type);
             try {
+                // STOP ALL AUDIO when switching sections
+                const bgMusic = document.getElementById('bgMusic');
+                if (bgMusic) {
+                    bgMusic.pause();
+                    bgMusic.currentTime = 0;
+                }
+                isPlaying = false;
+                if (playBtn) playBtn.textContent = '▶';
+
                 const selected = event?.target?.closest('.option-card');
                 console.log('Selected card:', !!selected);
                 if (selected) {
