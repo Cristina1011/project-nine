@@ -1681,9 +1681,10 @@
         });
 
         function selectOption(type) {
-            console.log('selectOption called with type:', type);
+            console.log('=== selectOption called with type:', type);
             try {
                 const selected = event?.target?.closest('.option-card');
+                console.log('Selected card:', !!selected);
                 if (selected) {
                     selected.classList.add('selected');
                 }
@@ -1692,13 +1693,17 @@
                     const flyingOptions = document.getElementById('flyingOptions');
                     const contentWrapper = document.getElementById('contentWrapper');
 
-                    console.log('contentWrapper found:', !!contentWrapper);
+                    console.log('Elements found - flyingOptions:', !!flyingOptions, 'contentWrapper:', !!contentWrapper);
 
-                    if (flyingOptions) flyingOptions.classList.remove('active');
+                    if (flyingOptions) {
+                        flyingOptions.classList.remove('active');
+                        console.log('Removed active from flyingOptions');
+                    }
 
                     // Remove all section classes
                     if (contentWrapper) {
                         contentWrapper.classList.remove('show-gallery', 'show-story', 'show-timeline', 'show-closing');
+                        console.log('Removed all show-* classes');
                     }
 
                     // Show back button
@@ -1708,25 +1713,26 @@
                         backBtn.style.visibility = 'visible';
                         backBtn.style.pointerEvents = 'auto';
                         backBtn.style.opacity = '1';
+                        console.log('Back button shown');
                     }
 
                     // Show only selected section
                     if (type === 'gallery') {
                         if (contentWrapper) {
                             contentWrapper.classList.add('show-gallery', 'active');
-                            console.log('Added show-gallery class. Classes:', contentWrapper.className);
+                            console.log('✓ Gallery section activated');
                         }
                         showMusicSelector('gallery');
                     } else if (type === 'story') {
                         if (contentWrapper) {
                             contentWrapper.classList.add('show-story', 'active');
-                            console.log('Added show-story class. Classes:', contentWrapper.className);
+                            console.log('✓ Story section activated');
                         }
                         showMusicSelector('story');
                     } else if (type === 'timeline') {
                         if (contentWrapper) {
                             contentWrapper.classList.add('show-timeline', 'active');
-                            console.log('Added show-timeline class. Classes:', contentWrapper.className);
+                            console.log('✓ Timeline section activated');
                         }
                         showMusicSelector('timeline');
                     }
@@ -1734,10 +1740,11 @@
                     // Scroll to top
                     if (contentWrapper) {
                         contentWrapper.scrollTop = 0;
+                        console.log('Scrolled to top');
                     }
                 }, 800);
             } catch (err) {
-                console.error('Error in selectOption:', err);
+                console.error('ERROR in selectOption:', err);
             }
         }
 
